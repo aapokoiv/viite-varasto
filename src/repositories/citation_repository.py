@@ -5,13 +5,8 @@ from entities.citation import Citation
 
 def get_citations():
     result = db.session.execute(text("SELECT id, type, author, title, year FROM citations"))
-    todos = result.fetchall()
-    return [Citation(todo[0], todo[1], todo[2]) for todo in todos] 
-
-def set_done(todo_id):
-    sql = text("UPDATE citations SET done = TRUE WHERE id = :id")
-    db.session.execute(sql, { "id": todo_id })
-    db.session.commit()
+    infos = result.fetchall()
+    return [Citation(info[0], info[1], info[2], info[3], info[4]) for info in infos]
 
 def create_todo(content):
     sql = text("INSERT INTO citations (content) VALUES (:content)")

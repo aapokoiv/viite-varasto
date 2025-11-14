@@ -1,9 +1,10 @@
 class Citation:
-    def __init__(self, id, content, done):
+    def __init__(self, id, type, author, title, year):
         self.id = id
-        self.content = content
-        self.done = done
+        self.type = type
+        self.author = author
+        self.title = title
+        self.year = year
 
     def __str__(self):
-        is_done = "done" if self.done else "not done"
-        return f"{self.content}, {is_done}"
+        return f"{self.title}"
