@@ -6,13 +6,24 @@ from util import validate_ref
 
 @app.route("/")
 def index():
-    todos = get_citations()
-    unfinished = len([todo for todo in todos])
-    return render_template("index.html", todos=todos, unfinished=unfinished) 
+    return render_template("index.html") 
 
 @app.route("/new_ref")
 def new():
     return render_template("new_ref.html")
+
+@app.route("/view_refs")
+def ref_list():
+    page = request.args.get("page", 1, type=int)
+    per_page = 10
+    data = get_citations(page, per_page)
+    
+    return render_template(
+        "ref_list.html",
+        refs=data["items"],
+        page=data["page"],
+        pages=data["pages"]
+    )
 
 @app.route("/create_ref", methods=["POST"])
 def ref_creation():
