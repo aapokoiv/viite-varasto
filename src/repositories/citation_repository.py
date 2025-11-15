@@ -8,7 +8,16 @@ def get_citations():
     infos = result.fetchall()
     return [Citation(info[0], info[1], info[2], info[3], info[4]) for info in infos]
 
-def create_todo(content):
-    sql = text("INSERT INTO citations (content) VALUES (:content)")
-    db.session.execute(sql, { "content": content })
+def create_ref(ref_type, author, title, year):
+    sql = text(
+    "INSERT INTO citations (type, author, title, year) "
+    "VALUES (:type, :author, :title, :year)"
+    )
+    params = {
+        "type": ref_type,
+        "author": author,
+        "title": title,
+        "year": year
+    }
+    db.session.execute(sql, params)
     db.session.commit()
