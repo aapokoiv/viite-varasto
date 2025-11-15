@@ -22,11 +22,11 @@ poetry install
 
 - Luo .env tiedosto ja aseta tietokantayhteys ja `SECRET_KEY`:
 
-
+```bash
 DATABASE_URL=postgresql://xxx
 TEST_ENV=true
 SECRET_KEY=satunnainen_merkkijono
-
+```
 
 **Tietokannan alustaminen**
 
