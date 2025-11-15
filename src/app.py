@@ -7,7 +7,7 @@ from util import validate_ref
 @app.route("/")
 def index():
     todos = get_citations()
-    unfinished = len([todo for todo in todos if not todo.done])
+    unfinished = len([todo for todo in todos])
     return render_template("index.html", todos=todos, unfinished=unfinished) 
 
 @app.route("/new_ref")
