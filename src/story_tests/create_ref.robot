@@ -52,29 +52,3 @@ Create Reference With Year Too Large
     Create Reference  article  Jukka  Testi  2027
     Page Should Contain  Invalid year
 
-
-
-*** Keywords ***
-
-Fill Reference Form
-    [Arguments]  ${type}  ${author}  ${title}  ${year}
-    Select From List By Value  name=ref_type  ${type}
-    Input Text  name=ref_author  ${author}
-    Input Text  name=ref_title  ${title}
-    Input Text  name=ref_year  ${year}
-
-Submit Reference
-    Click Button  name=ref_submit
-
-Create Reference
-    [Arguments]  ${type}  ${author}  ${title}  ${year}
-    Open New Reference Page
-    Fill Reference Form  ${type}  ${author}  ${title}  ${year}
-    Submit Reference
-
-No Error Messages
-    Page Should Not Contain  Author and title must be at least 5 characters long
-    Page Should Not Contain  Author and title must be at most 300 characters long
-    Page Should Not Contain  Invalid reference type
-    Page Should Not Contain  Year must be an integer
-    Page Should Not Contain  Invalid year
