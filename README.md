@@ -30,10 +30,10 @@ SECRET_KEY=satunnainen_merkkijono
 
 **Tietokannan alustaminen**
 
-- Aja `db_helper.py` projektin juuressa:
+- Aja `db_helper.py` projektin juuressa `setup` argumentilla:
 
 ```bash
-python3 src/db_helper.py
+python3 src/db_helper.py setup
 ```
 
 **Käyttö**
