@@ -8,17 +8,16 @@ See all the citations
 
 <h2>View all the references</h2>
 
-{% if refs %}
 <!-- Filtering -->
 <div style="margin-bottom: 10px;">
     <span style="font-size: 20px;">Filter references:</span>
     <form action="/view_refs" method="get" autocomplete="off">
-        Title: 
-        <input type="search" placeholder="Etsi viitettä..." minlength="5" maxlength="300">
+        Search: 
+        <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Etsi viitettä..." maxlength="300">
         Type: 
-        <select name="cite_type">
+        <select name="type">
             {% for type in available_filters["types"] %}
-                <option value="{{ type }}" {% if active_filters.cite_type == type %}selected{% endif %}>
+                <option value="{{ type }}" {% if active_filters.type == type %}selected{% endif %}>
                     {{ type|capitalize }}
                 </option>
             {% endfor %}
@@ -27,6 +26,7 @@ See all the citations
     </form>
 </div>
 
+{% if refs %}
 <!-- References -->
 <table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align: center;">
     <tr style="background: #f4f4f4; text-transform: uppercase; border-bottom: 2px solid #ccc;">

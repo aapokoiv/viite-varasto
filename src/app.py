@@ -18,7 +18,8 @@ def ref_list():
     per_page = 10
 
     filters = {
-        "type": request.args.get("cite_type")
+        "query": request.args.get("query", ""),
+        "type": request.args.get("type")
     }
 
     data = get_citations(page, per_page, filters)
@@ -29,7 +30,10 @@ def ref_list():
         page=data["page"],
         pages=data["pages"],
         available_filters=get_filters(),
-        active_filters={"cite_type": filters["type"]}
+        active_filters={
+            "query": filters["query"],
+            "type": filters["type"]
+        }
     )
 
 @app.route("/create_ref", methods=["POST"])

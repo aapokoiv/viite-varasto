@@ -4,12 +4,15 @@ from sqlalchemy import text
 from entities.citation import Citation
 
 def get_citations(page: int=1, per_page: int=10, filters = None):
-    filters = {"type": ""} if filters is None else filters
+    filters = {"query":"","type":""} if filters is None else filters
 
     offset = (page - 1) * per_page
     sql = "SELECT id, type, author, title, year FROM citations WHERE 1=1"
     count_sql = "SELECT COUNT(*) FROM citations WHERE 1=1"
 
+    if filters["query"]:
+        sql += " AND (title ILIKE :query OR author ILIKE :query)"
+        count_sql += " AND (title ILIKE :query OR author ILIKE :query)"
     if filters["type"] and filters["type"] != "-":
         sql += " AND type = :type"
         count_sql += " AND type = :type"
@@ -19,9 +22,13 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
     result = db.session.execute(text(sql), {
         "limit": per_page,
         "offset": offset,
+        "query": f"%{filters["query"]}%",
         "type": filters["type"]
         })
-    count_result = db.session.execute(text(count_sql), {"type": filters["type"]})
+    count_result = db.session.execute(text(count_sql), {
+        "query": f"%{filters["query"]}%",
+        "type": filters["type"]
+        })
 
     infos = result.fetchall()
     total = count_result.scalar()
