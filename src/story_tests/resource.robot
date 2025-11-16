@@ -6,6 +6,7 @@ ${SERVER}     localhost:5001
 ${DELAY}      0.5 seconds
 ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
+${NEW_REF_URL}  http://${SERVER}/new_ref
 ${BROWSER}    chrome
 ${HEADLESS}   false
 
@@ -28,4 +29,14 @@ Open And Configure Browser
 
 Reset Todos
     Go To  ${RESET_URL}
+
+Reset Refs
+    Go To  ${RESET_URL}
+    Go To  ${HOME_URL}
+
+Open Home Page
+    Go To  ${HOME_URL}
+
+Open New Reference Page
+    Go To  ${NEW_REF_URL}
 
