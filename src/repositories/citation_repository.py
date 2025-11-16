@@ -3,7 +3,9 @@ from sqlalchemy import text
 
 from entities.citation import Citation
 
-def get_citations(page: int=1, per_page: int=10, filters: dict=None):
+def get_citations(page: int=1, per_page: int=10, filters = None):
+    filters = {"type": ""} if filters is None else filters
+
     offset = (page - 1) * per_page
     sql = "SELECT id, type, author, title, year FROM citations WHERE 1=1"
     count_sql = "SELECT COUNT(*) FROM citations WHERE 1=1"
