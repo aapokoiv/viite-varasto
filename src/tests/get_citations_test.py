@@ -40,6 +40,19 @@ class TestGetCitations(unittest.TestCase):
             self.assertEqual(result["total"], 3)
             self.assertEqual(len(result["items"]), 3)
 
+    def test_get_citations_filtered_by_type(self):
+        with app.app_context():
+            for _ in range(12):
+                create_ref("article", "John Doe", "Test Article", 2020)
+            create_ref("book", "Jane Smith", "Test Book", 2021)
+            create_ref("book", "Jane Smith", "Test Book", 2021)
+            self.assertEqual(get_citations(filters={"type": "book"})["total"], 2)
+            self.assertEqual(get_citations(filters={"type": "article"})["total"], 12)
+            self.assertEqual(get_citations(filters={"type": "inproceedings"})["total"], 0)
+            self.assertEqual(get_citations(filters={"type": "article"})["pages"], 2)
+            self.assertEqual(get_citations(filters={"type": "book"})["pages"], 1)
+            self.assertEqual(get_citations(filters={"type": "misc"})["pages"], 0)
+
     def test_pagination(self):
         with app.app_context():
             create_ref("article", "Author 1", "Title 1", 2020)
