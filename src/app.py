@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.citation_repository import get_citations, create_ref
+from repositories.citation_repository import get_citations, get_filters, create_ref
 from config import app, test_env
 from util import validate_ref
 
@@ -16,13 +16,20 @@ def new():
 def ref_list():
     page = request.args.get("page", 1, type=int)
     per_page = 10
-    data = get_citations(page, per_page)
+
+    filters = {
+        "type": request.args.get("cite_type")
+    }
+
+    data = get_citations(page, per_page, filters)
     
     return render_template(
         "ref_list.html",
         refs=data["items"],
         page=data["page"],
-        pages=data["pages"]
+        pages=data["pages"],
+        available_filters=get_filters(),
+        active_filters={"cite_type": filters["type"]}
     )
 
 @app.route("/create_ref", methods=["POST"])

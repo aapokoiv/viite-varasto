@@ -9,6 +9,25 @@ See all the citations
 <h2>View all the references</h2>
 
 {% if refs %}
+<!-- Filtering -->
+<div style="margin-bottom: 10px;">
+    <span style="font-size: 20px;">Filter references:</span>
+    <form action="/view_refs" method="get" autocomplete="off">
+        Title: 
+        <input type="search" placeholder="Etsi viitettä..." minlength="5" maxlength="300">
+        Type: 
+        <select name="cite_type">
+            {% for type in available_filters["types"] %}
+                <option value="{{ type }}" {% if active_filters.cite_type == type %}selected{% endif %}>
+                    {{ type|capitalize }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" >Filter</button>
+    </form>
+</div>
+
+<!-- References -->
 <table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align: center;">
     <tr style="background: #f4f4f4; text-transform: uppercase; border-bottom: 2px solid #ccc;">
         <th style="padding: 12px;">ID</th>
@@ -29,15 +48,16 @@ See all the citations
     {% endfor %}
 </table>
 
+<!-- Page Navigation -->
 <div style="margin-top: 20px; text-align: center;">
     {% if page > 1 %}
-        <a href="{{ url_for('ref_list', page=page-1) }}">« Previous</a>
+        <a href="{{ url_for('ref_list', cite_type=active_filters.cite_type, page=page-1) }}">« Previous</a>
     {% endif %}
 
     Page {{ page }} of {{ pages }}
 
     {% if page < pages %}
-        <a href="{{ url_for('ref_list', page=page+1) }}">Next »</a>
+        <a href="{{ url_for('ref_list', cite_type=active_filters.cite_type, page=page+1) }}">Next »</a>
     {% endif %}
 </div>
 
