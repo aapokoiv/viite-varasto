@@ -35,15 +35,22 @@ See all the citations
         <th style="padding: 12px;">Author</th>
         <th style="padding: 12px;">Title</th>
         <th style="padding: 12px;">Year</th>
+        <th style="padding: 12px;">Actions</th>
     </tr>
 
     {% for ref in refs %}
-    <tr style="border-bottom: 1px solid #ddd;" onmouseover="this.style.backgroundColor='#eef7ff'" onmouseout="this.style.backgroundColor=''">
+    <tr style="border-bottom: 1px solid #ddd;" onmouseover="this.style.backgroundColor='#eef7ff'"
+        onmouseout="this.style.backgroundColor=''">
         <td style="padding: 10px;">{{ ref.id }}</td>
         <td style="padding: 10px;">{{ ref.type }}</td>
         <td style="padding: 10px;">{{ ref.author }}</td>
         <td style="padding: 10px;">{{ ref.title }}</td>
         <td style="padding: 10px;">{{ ref.year }}</td>
+        <td style="padding: 10px;">
+            <form action="/edit_ref/{{ ref.id }}" method="get">
+                <input type="submit" value="Muokkaa">
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>

@@ -6,6 +6,8 @@ ${SERVER}     localhost:5001
 ${DELAY}      0.5 seconds
 ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
+${NEW_REF_URL}  http://${SERVER}/new_ref
+${REF_LIST_URL}  http://${SERVER}/view_refs
 ${BROWSER}    chrome
 ${HEADLESS}   false
 
@@ -29,3 +31,38 @@ Open And Configure Browser
 Reset Todos
     Go To  ${RESET_URL}
 
+Reset Refs
+    Go To  ${RESET_URL}
+    Go To  ${HOME_URL}
+
+Open Home Page
+    Go To  ${HOME_URL}
+
+Open New Reference Page
+    Go To  ${NEW_REF_URL}
+
+Open Reference List Page
+    Go To  ${REF_LIST_URL}
+
+Fill Reference Form
+    [Arguments]  ${type}  ${author}  ${title}  ${year}
+    Select From List By Value  name=ref_type  ${type}
+    Input Text  name=ref_author  ${author}
+    Input Text  name=ref_title  ${title}
+    Input Text  name=ref_year  ${year}
+
+Submit Reference
+    Click Button  name=ref_submit
+
+Create Reference
+    [Arguments]  ${type}  ${author}  ${title}  ${year}
+    Open New Reference Page
+    Fill Reference Form  ${type}  ${author}  ${title}  ${year}
+    Submit Reference
+
+No Error Messages
+    Page Should Not Contain  Author and title must be at least 5 characters long
+    Page Should Not Contain  Author and title must be at most 300 characters long
+    Page Should Not Contain  Invalid reference type
+    Page Should Not Contain  Year must be an integer
+    Page Should Not Contain  Invalid year

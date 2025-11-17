@@ -3,6 +3,11 @@ from sqlalchemy import text
 
 from entities.citation import Citation
 
+def get_citation_by_id(ref_id):
+    sql = text("SELECT id, type, author, title, year FROM citations WHERE id = :ref_id")
+    result = db.session.execute(sql, {"ref_id": ref_id}).fetchone()
+    return Citation(result[0], result[1], result[2], result[3], result[4]) if result else None
+
 def get_citations(page: int=1, per_page: int=10, filters = None):
     filters = {"query":"","type":""} if filters is None else filters
 
@@ -61,6 +66,17 @@ def create_ref(ref_type, author, title, year):
         "author": author,
         "title": title,
         "year": year
+    }
+    db.session.execute(sql, params)
+    db.session.commit()
+
+def update_ref(ref_id, author, title, year):
+    sql = text("UPDATE citations SET author = :author, title = :title, year = :year WHERE id = :ref_id")
+    params = {
+        "author": author, 
+        "title": title, 
+        "year": year, 
+        "ref_id": ref_id
     }
     db.session.execute(sql, params)
     db.session.commit()
