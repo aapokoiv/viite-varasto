@@ -1,6 +1,10 @@
 from config import db, app
 from sqlalchemy import text
+import random
+import string
 import os
+import sys
+from repositories.citation_repository import create_ref
 
 def reset_db():
   print(f"Clearing contents from table citations")
@@ -44,6 +48,29 @@ def setup_db():
   db.session.execute(sql)
   db.session.commit()
 
+def create_test_data(amount: int = 50):
+  types = ['article', 'book', 'inproceedings', 'misc']
+
+  print("Creating randomized test data.")
+  for _ in range(amount):
+    create_ref(
+      random.choice(types),
+      ''.join(random.choices(string.ascii_letters, k=10)),
+      ''.join(random.choices(string.ascii_letters, k=20)),
+      random.randrange(1, 2025)
+    )
+  print("Data creation complete.")
+
 if __name__ == "__main__":
-    with app.app_context():
+  with app.app_context():
+    if len(sys.argv) > 1 and sys.argv[1] == "testdata":
+      create_test_data()
+    elif len(sys.argv) > 1 and sys.argv[1] == "setup":
       setup_db()
+    elif len(sys.argv) > 1 and sys.argv[1] == "reset":
+      reset_db()
+    else:
+      print("Use one of the following arguments: \n" \
+            "   setup - Sets up the database \n" \
+            "   reset - Resets the database \n" \
+            "   testdata - Creates randomized data to the database \n")
