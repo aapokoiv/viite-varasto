@@ -58,13 +58,13 @@ See all the citations
 <!-- Page Navigation -->
 <div style="margin-top: 20px; text-align: center;">
     {% if page > 1 %}
-        <a href="{{ url_for('ref_list', cite_type=active_filters.cite_type, page=page-1) }}">« Previous</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1) }}">« Previous</a>
     {% endif %}
 
     Page {{ page }} of {{ pages }}
 
     {% if page < pages %}
-        <a href="{{ url_for('ref_list', cite_type=active_filters.cite_type, page=page+1) }}">Next »</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1) }}">Next »</a>
     {% endif %}
 </div>
 
