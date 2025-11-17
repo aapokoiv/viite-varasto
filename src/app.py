@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify, flash, abort
 from db_helper import reset_db
 from repositories.citation_repository import get_citations, get_filters, create_ref, get_citation_by_id, update_ref
 from config import app, test_env
@@ -57,12 +57,11 @@ def ref_edit(ref_id):
     if request.method == "POST":
         author = request.form.get("ref_author")
         title = request.form.get("ref_title")
-        year = int(request.form.get("ref_year"))
-
-        if not author or not title or year > 2026 or year < 1:
-            abort(403)
+        year = request.form.get("ref_year")
+        
         try:
-            update_ref(ref.id, author, title, year)
+            year_int = validate_ref(ref.type, author, title, year)
+            update_ref(ref.id, author, title, year_int)
         except Exception as error:
             flash(str(error))
             return redirect("/edit_ref/"+ str(ref_id))
