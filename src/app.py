@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.citation_repository import get_citations, create_ref
+from repositories.citation_repository import get_citations, create_ref, get_citation_by_id, update_ref
 from config import app, test_env
 from util import validate_ref
 
@@ -39,6 +39,27 @@ def ref_creation():
     except Exception as error:
         flash(str(error))
         return redirect("/new_ref")
+
+@app.route("/edit_ref/<int:ref_id>", methods=["GET" ,"POST"])
+def ref_edit(ref_id):
+    ref = get_citation_by_id(ref_id)
+    if not ref:
+        abort(404)
+    if request.method == "GET":
+        return render_template("edit_ref.html", ref=ref)
+    if request.method == "POST":
+        author = request.form.get("ref_author")
+        title = request.form.get("ref_title")
+        year = int(request.form.get("ref_year"))
+
+        if not author or not title or year > 2026 or year < 1:
+            abort(403)
+        try:
+            update_ref(ref.id, author, title, year)
+        except Exception as error:
+            flash(str(error))
+            return redirect("/edit_ref/"+ str(ref_id))
+        return redirect("/view_refs")
 
 # testausta varten oleva reitti
 if test_env:
