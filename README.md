@@ -1,9 +1,4 @@
-## Ohtu miniprojekti boilerplate
-
-Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
-
-Muutamia vihjeitä projektin alkuun [täällä](https://github.com/ohjelmistotuotanto-hy/miniprojekti-boilerplate/blob/main/misc/ohjeita.md).
-
+## Viite Varasto
 
 Backlogi: [täällä](https://helsinkifi-my.sharepoint.com/:x:/g/personal/aapokoiv_ad_helsinki_fi/IQDEuVCXAv8rSYSaMAgaQt6zAbibmJOpDFhpTtWDTGlsCXM?e=8AC0gf)
 
@@ -47,8 +42,8 @@ eval $(poetry env activate)
 - Käynnistä sovellus:
 
 ```bash
-flask run
+python3 src/index.py
 ```
 
-- Avaa `http://127.0.0.1:5001` selaimella.
+- Avaa `http://localhost:5001` selaimella.
 
