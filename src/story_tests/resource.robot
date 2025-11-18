@@ -60,6 +60,16 @@ Create Reference
     Fill Reference Form  ${type}  ${author}  ${title}  ${year}
     Submit Reference
 
+Filter References By Selection
+    [Arguments]  ${filter}  ${value}
+    Select From List By Value  ${filter}  ${value}
+    Click Button  Filter
+
+Filter References By Search
+    [Arguments]  ${value}
+    Input Text  query  ${value}
+    Click Button  Filter
+
 No Error Messages
     Page Should Not Contain  Author and title must be at least 5 characters long
     Page Should Not Contain  Author and title must be at most 300 characters long
