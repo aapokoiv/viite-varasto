@@ -1,32 +1,33 @@
-Glad:
+## Glad:
 Saatiin asioita tehtyä, kaikki osallistui
 
-Sad:
--0.25p :(
--Liian huonoa kommunikointi, myöhässä valmistauduttu
+## Sad:
+- 0.25p :(
+- Liian huonoa kommunikointi, myöhässä valmistauduttu
 
-Mad:
-Linux kaatu, Copilot ei osaa exceliä
-Asennusohjeet oli shit
+## Mad:
+- Linux kaatu
+- Copilot ei osaa exceliä
+- Asennusohjeet oli shit
 
 
-Start:
-Yksikkötestausta
-Aikamääreiden arvio ja burnup
+## Start:
+- Yksikkötestausta
+- Aikamääreiden arvio ja burnup
 
-Stop:
--
+## Stop:
+none
 
-Continue:
+## Continue:
 Töitä
 
-More of:
+## More of:
 Kommunikaatio
 
-Less of:
--
+## Less of:
+none
 
 
-Parannetaan:
-Parempi kommunikointi
-Parempi valmistautuminen
+# Parannetaan:
+Parempi kommunikointi & 
+Parempi valmistautuminen asiakastapaamiseen
