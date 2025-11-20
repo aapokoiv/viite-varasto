@@ -11,9 +11,6 @@ def index():
 @app.route("/new_ref")
 def new():
     option = request.args.get("ref_type", "article")
-    ref_author = request.args.get("author", "")
-    ref_title = request.args.get("title", "")
-    ref_year = request.args.get("year", "")
     return render_template("new_ref.html", option=option)
 
 @app.route("/view_refs")
