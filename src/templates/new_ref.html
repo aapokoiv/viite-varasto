@@ -7,24 +7,27 @@ Create a new todo
 {% block body %}
 
 <h2>Add a new reference</h2>
-
-<form action="/create_ref" method="post">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<form action="/new_ref" method="get">
   <label for="ref_type">Type:</label>
-  <select id="ref_type" name="ref_type" required>
-    <option value="article">Article</option>
-    <option value="book">Book</option>
-    <option value="inproceedings">Inproceedings</option>
-    <option value="misc">Misc</option>
+  <select id="ref_type" name="ref_type" required onchange="this.form.submit()">
+    <option value="article" {% if option=="article" %}selected{% endif %}>Article</option>
+    <option value="book" {% if option=="book" %}selected{% endif %}>Book</option>
+    <option value="inproceedings" {% if option=="inproceedings" %}selected{% endif %}>Inproceedings
+    </option>
+    <option value="misc" name="option" {% if option=="misc" %}selected{% endif %}>Misc</option>
   </select>
+</form>
+<form action="/create_ref" method="post">
+  <input type="hidden" name="ref_type" value="{{ option }}">
 
   <label for="ref_author">Author:</label>
   <input type="text" id="ref_author" name="ref_author">
@@ -34,6 +37,27 @@ Create a new todo
 
   <label for="ref_year">Year:</label>
   <input type="text" id="ref_year" name="ref_year">
+
+  {% if option=="article" %}
+  <label for="ref_journal">*Journal:</label>
+  <input type="text" id="ref_journal" name="ref_journal">
+
+  <label for="ref_volume">*Volume:</label>
+  <input type="text" id="ref_volume" name="ref_volume">
+
+  <label for="ref_pages">*Pages:</label>
+  <input type="text" id="ref_pages" name="ref_pages">
+  {% endif %}
+
+  {% if option=="book" %}
+  <label for="ref_publisher">*Publisher:</label>
+  <input type="text" id="ref_publisher" name="ref_publisher">
+  {% endif %}
+
+  {% if option=="inproceedings" %}
+  <label for="ref_booktitle">*Booktitle:</label>
+  <input type="text" id="ref_booktitle" name="ref_booktitle">
+  {% endif %}
 
   <br>
   <button type="submit" name="ref_submit">
