@@ -63,10 +63,11 @@ def ref_edit(ref_id):
         author = request.form.get("ref_author")
         title = request.form.get("ref_title")
         year = request.form.get("ref_year")
+        keyword = request.form.get("ref_keyword")
         
         try:
-            year_int = validate_ref(ref.type, author, title, year)
-            update_ref(ref.id, author, title, year_int)
+            year_int = validate_ref(ref.type, keyword, author, title, year)
+            update_ref(ref.id, author, title, year_int, keyword)
         except Exception as error:
             flash(str(error))
             return redirect("/edit_ref/"+ str(ref_id))

@@ -16,8 +16,8 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
     count_sql = "SELECT COUNT(*) FROM citations WHERE 1=1"
 
     if filters["query"]:
-        sql += " AND (title ILIKE :query OR author ILIKE :query)"
-        count_sql += " AND (title ILIKE :query OR author ILIKE :query)"
+        sql += " AND (title ILIKE :query OR author ILIKE :query OR keyword ILIKE :query)"
+        count_sql += " AND (title ILIKE :query OR author ILIKE :query OR keyword ILIKE :query)"
     if filters["type"] and filters["type"] != "-":
         sql += " AND type = :type"
         count_sql += " AND type = :type"
@@ -71,12 +71,13 @@ def create_ref(ref_type, keyword, author, title, year):
     db.session.execute(sql, params)
     db.session.commit()
 
-def update_ref(ref_id, author, title, year):
-    sql = text("UPDATE citations SET author = :author, title = :title, year = :year WHERE id = :ref_id")
+def update_ref(ref_id, author, title, year, keyword):
+    sql = text("UPDATE citations SET author = :author, title = :title, year = :year, keyword = :keyword WHERE id = :ref_id")
     params = {
         "author": author, 
         "title": title, 
-        "year": year, 
+        "year": year,
+        "keyword": keyword,
         "ref_id": ref_id
     }
     db.session.execute(sql, params)
