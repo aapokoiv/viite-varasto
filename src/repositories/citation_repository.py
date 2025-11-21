@@ -4,20 +4,20 @@ from sqlalchemy import text
 from entities.citation import Citation
 
 def get_citation_by_id(ref_id):
-    sql = text("SELECT id, type, author, title, year FROM citations WHERE id = :ref_id")
+    sql = text("SELECT id, keyword, type, author, title, year FROM citations WHERE id = :ref_id")
     result = db.session.execute(sql, {"ref_id": ref_id}).fetchone()
-    return Citation(result[0], result[1], result[2], result[3], result[4]) if result else None
+    return Citation(result[0], result[1], result[2], result[3], result[4], result[5]) if result else None
 
 def get_citations(page: int=1, per_page: int=10, filters = None):
     filters = {"query":"","type":""} if filters is None else filters
 
     offset = (page - 1) * per_page
-    sql = "SELECT id, type, author, title, year FROM citations WHERE 1=1"
+    sql = "SELECT id, keyword, type, author, title, year FROM citations WHERE 1=1"
     count_sql = "SELECT COUNT(*) FROM citations WHERE 1=1"
 
     if filters["query"]:
-        sql += " AND (title ILIKE :query OR author ILIKE :query)"
-        count_sql += " AND (title ILIKE :query OR author ILIKE :query)"
+        sql += " AND (title ILIKE :query OR author ILIKE :query OR keyword ILIKE :query)"
+        count_sql += " AND (title ILIKE :query OR author ILIKE :query OR keyword ILIKE :query)"
     if filters["type"] and filters["type"] != "-":
         sql += " AND type = :type"
         count_sql += " AND type = :type"
@@ -39,7 +39,7 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
     total = count_result.scalar()
     
     return {
-        "items": [Citation(info[0], info[1], info[2], info[3], info[4]) for info in infos],
+        "items": [Citation(info[0], info[1], info[2], info[3], info[4], info[5]) for info in infos],
         "total": total,
         "page": page,
         "per_page": per_page,
@@ -56,13 +56,14 @@ def get_filters():
     return {"types": types,
             "years": years}
 
-def create_ref(ref_type, author, title, year):
+def create_ref(ref_type, keyword, author, title, year):
     sql = text(
-    "INSERT INTO citations (type, author, title, year) "
-    "VALUES (:type, :author, :title, :year)"
+    "INSERT INTO citations (type, keyword, author, title, year) "
+    "VALUES (:type, :keyword, :author, :title, :year)"
     )
     params = {
         "type": ref_type,
+        "keyword": keyword,
         "author": author,
         "title": title,
         "year": year
@@ -70,12 +71,13 @@ def create_ref(ref_type, author, title, year):
     db.session.execute(sql, params)
     db.session.commit()
 
-def update_ref(ref_id, author, title, year):
-    sql = text("UPDATE citations SET author = :author, title = :title, year = :year WHERE id = :ref_id")
+def update_ref(ref_id, author, title, year, keyword):
+    sql = text("UPDATE citations SET author = :author, title = :title, year = :year, keyword = :keyword WHERE id = :ref_id")
     params = {
         "author": author, 
         "title": title, 
-        "year": year, 
+        "year": year,
+        "keyword": keyword,
         "ref_id": ref_id
     }
     db.session.execute(sql, params)
