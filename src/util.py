@@ -40,3 +40,27 @@ def validate_ref(ref_type, author, title, year):
 
     # Return parsed year for convenience to callers
     return year_int
+
+def validate_article_fields(journal, volume, pages):
+    MAX_LEN = 300
+    if volume:
+        try:
+            volume = int(volume)
+        except (TypeError, ValueError):
+            raise UserInputError("Volume must be an integer")
+    if journal:
+        if len(journal) > MAX_LEN:
+            raise UserInputError(f"Journal must be at most {MAX_LEN} characters long")
+    return volume
+
+def validate_book_field(publisher):
+    MAX_LEN = 300
+    if publisher:
+        if len(publisher) > MAX_LEN:
+            raise UserInputError(f"Journal must be at most {MAX_LEN} characters long")
+
+def validate_inproceedings_field(booktitle):
+    MAX_LEN = 300
+    if booktitle:
+        if len(booktitle) > MAX_LEN:
+            raise UserInputError(f"Booktitle must be at most {MAX_LEN} characters long")

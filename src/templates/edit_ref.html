@@ -18,7 +18,19 @@ Edit reference
     </ul>
     {% endif %}
     {% endwith %}
+    <form action="/edit_ref/{{ ref.id }}" method="get">
+        <label for="ref_type">Type:</label>
+        <select id="ref_type" name="ref_type" required onchange="this.form.submit()">
+            <option value="article" {% if option=="article" %}selected{% endif %}>Article</option>
+            <option value="book" {% if option=="book" %}selected{% endif %}>Book</option>
+            <option value="inproceedings" {% if option=="inproceedings" %}selected{% endif %}>Inproceedings
+            </option>
+            <option value="misc" name="option" {% if option=="misc" %}selected{% endif %}>Misc</option>
+        </select>
+    </form>
     <form action="/edit_ref/{{ ref.id }}" method="post">
+        <input type="hidden" name="ref_type" value="{{ option }}">
+
         <label for="ref_author">Author:</label>
         <input type="text" id="ref_author" name="ref_author" value="{{ ref.author }}" required>
 
@@ -27,6 +39,27 @@ Edit reference
 
         <label for="ref_year">Year:</label>
         <input type="number" id="ref_year" name="ref_year" value="{{ ref.year }}" required>
+
+        {% if option=="article" %}
+        <label for="ref_journal">*Journal:</label>
+        <input type="text" id="ref_journal" name="ref_journal" value="{{ ref.journal or '' }}">
+
+        <label for="ref_volume">*Volume:</label>
+        <input type="text" id="ref_volume" name="ref_volume" value="{{ ref.volume or '' }}">
+
+        <label for="ref_pages">*Pages:</label>
+        <input type="text" id="ref_pages" name="ref_pages" value="{{ ref.pages or '' }}">
+        {% endif %}
+
+        {% if option=="book" %}
+        <label for="ref_publisher">*Publisher:</label>
+        <input type="text" id="ref_publisher" name="ref_publisher" value="{{ ref.publisher or '' }}">
+        {% endif %}
+
+        {% if option=="inproceedings" %}
+        <label for="ref_booktitle">*Booktitle:</label>
+        <input type="text" id="ref_booktitle" name="ref_booktitle" value="{{ ref.booktitle or '' }}">
+        {% endif %}
         <br>
         <button type="submit" name="ref_edit">
             Edit
