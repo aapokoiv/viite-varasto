@@ -1,5 +1,6 @@
 CREATE TABLE citations (
   id SERIAL PRIMARY KEY, 
+  keyword TEXT NOT NULL,
   type TEXT CHECK (type IN ('article', 'book', 'inproceedings', 'misc')) DEFAULT 'misc',
   author TEXT DEFAULT NULL,
   title TEXT DEFAULT NULL,

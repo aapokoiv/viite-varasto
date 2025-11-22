@@ -29,6 +29,9 @@ Create a new todo
 <form action="/create_ref" method="post">
   <input type="hidden" name="ref_type" value="{{ option }}">
 
+  <label for="ref_keyword">Keyword:</label>
+  <input type="text" id="ref_keyword" name="ref_keyword">
+
   <label for="ref_author">Author:</label>
   <input type="text" id="ref_author" name="ref_author">
 

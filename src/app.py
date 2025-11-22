@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash, abort
 from db_helper import reset_db
 from repositories.citation_repository import get_citations, get_filters, create_ref, get_citation_by_id, update_ref
 from config import app, test_env
-from util import validate_ref, validate_article_fields, validate_book_field, validate_inproceedings_field
+from util import validate_ref, validate_article_fields
 
 @app.route("/")
 def index():
@@ -40,6 +40,7 @@ def ref_list():
 @app.route("/create_ref", methods=["POST"])
 def ref_creation():
     ref_type = request.form.get("ref_type")
+    keyword = request.form.get("ref_keyword")
     author = request.form.get("ref_author")
     title = request.form.get("ref_title")
     year = request.form.get("ref_year")
@@ -52,12 +53,8 @@ def ref_creation():
     try:
         if ref_type == "article":
             volume = validate_article_fields(journal, volume, pages)
-        elif ref_type == "book":
-            validate_book_field(publisher)
-        elif ref_type == "inproceedings":
-            validate_inproceedings_field(booktitle)
-        year_int = validate_ref(ref_type, author, title, year)
-        create_ref(ref_type, author, title, year_int, journal, volume, pages, publisher, booktitle)
+        year_int = validate_ref(ref_type, keyword, author, title, year)
+        create_ref(ref_type, keyword, author, title, year_int, journal, volume, pages, publisher, booktitle)
         return redirect("/")
     except Exception as error:
         flash(str(error))
@@ -76,6 +73,7 @@ def ref_edit(ref_id):
 
     if request.method == "POST":
         ref_type = request.form.get("ref_type")
+        keyword = request.form.get("ref_keyword")
         author = request.form.get("ref_author")
         title = request.form.get("ref_title")
         year = request.form.get("ref_year")
@@ -88,12 +86,8 @@ def ref_edit(ref_id):
         try:
             if ref_type == "article":
                 volume = validate_article_fields(journal, volume, pages)
-            elif ref_type == "book":
-                validate_book_field(publisher)
-            elif ref_type == "inproceedings":
-                validate_inproceedings_field(booktitle)
-            year_int = validate_ref(ref_type, author, title, year)
-            update_ref(ref.id, ref_type, author, title, year_int, journal, volume, pages, publisher, booktitle)
+            year_int = validate_ref(ref_type, keyword, author, title, year)
+            update_ref(ref.id, ref_type, keyword, author, title, year_int, journal, volume, pages, publisher, booktitle)
         except Exception as error:
             flash(str(error))
             return redirect("/edit_ref/"+ str(ref_id))

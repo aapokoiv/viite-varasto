@@ -31,6 +31,9 @@ Edit reference
     <form action="/edit_ref/{{ ref.id }}" method="post">
         <input type="hidden" name="ref_type" value="{{ option }}">
 
+        <label for="ref_keyword">Keyword:</label>
+        <input type="text" id="ref_keyword" name="ref_keyword" value="{{ ref.keyword }}" required>
+
         <label for="ref_author">Author:</label>
         <input type="text" id="ref_author" name="ref_author" value="{{ ref.author }}" required>
 

@@ -45,8 +45,9 @@ Open Reference List Page
     Go To  ${REF_LIST_URL}
 
 Fill Reference Form
-    [Arguments]  ${type}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
+    [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
     Select From List By Value  name=ref_type  ${type}
+    Input Text  name=ref_keyword  ${keyword}
     Input Text  name=ref_author  ${author}
     Input Text  name=ref_title  ${title}
     Input Text  name=ref_year  ${year}
@@ -68,9 +69,9 @@ Submit Reference
     Click Button  name=ref_submit
 
 Create Reference
-    [Arguments]  ${type}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
+    [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
     Open New Reference Page
-    Fill Reference Form  ${type}  ${author}  ${title}  ${year}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
+    Fill Reference Form  ${type}  ${keyword}   ${author}  ${title}  ${year}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
     Submit Reference
 
 Filter References By Selection
