@@ -56,7 +56,7 @@ def get_filters():
     return {"types": types,
             "years": years}
 
-def create_ref(ref_type, author, title, year, journal, volume, pages, publisher, booktitle):
+def create_ref(ref_type, author, title, year, journal=None, volume=None, pages=None, publisher=None, booktitle=None):
     params = {
         "type": ref_type,
         "author": author, 
@@ -77,7 +77,7 @@ def create_ref(ref_type, author, title, year, journal, volume, pages, publisher,
     db.session.execute(sql, params)
     db.session.commit()
 
-def update_ref(ref_id, ref_type, author, title, year, booktitle, journal, volume, pages, publisher):
+def update_ref(ref_id, ref_type, author, title, year, journal=None, volume=None, pages=None, publisher=None, booktitle=None):
     params = {
         "ref_id": ref_id,
         "type": ref_type,

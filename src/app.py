@@ -93,7 +93,7 @@ def ref_edit(ref_id):
             elif ref_type == "inproceedings":
                 validate_inproceedings_field(booktitle)
             year_int = validate_ref(ref_type, author, title, year)
-            update_ref(ref.id, ref_type, author, title, year_int, booktitle, journal, volume, pages, publisher)
+            update_ref(ref.id, ref_type, author, title, year_int, journal, volume, pages, publisher, booktitle)
         except Exception as error:
             flash(str(error))
             return redirect("/edit_ref/"+ str(ref_id))
