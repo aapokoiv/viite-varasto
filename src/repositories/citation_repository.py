@@ -58,7 +58,7 @@ def get_filters():
 
 def create_ref(ref_type, author, title, year, journal, volume, pages, publisher, booktitle):
     params = {
-        "ref_type": ref_type,
+        "type": ref_type,
         "author": author, 
         "title": title, 
         "year": year,
@@ -80,7 +80,7 @@ def create_ref(ref_type, author, title, year, journal, volume, pages, publisher,
 def update_ref(ref_id, ref_type, author, title, year, booktitle, journal, volume, pages, publisher):
     params = {
         "ref_id": ref_id,
-        "ref_type": ref_type,
+        "type": ref_type,
         "author": author, 
         "title": title, 
         "year": year,

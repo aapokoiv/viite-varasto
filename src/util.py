@@ -51,13 +51,16 @@ def validate_article_fields(journal, volume, pages):
     if journal:
         if len(journal) > MAX_LEN:
             raise UserInputError(f"Journal must be at most {MAX_LEN} characters long")
+    if pages:
+        if len(pages) > MAX_LEN:
+            raise UserInputError(f"Pages must be at most {MAX_LEN} characters long")
     return volume
 
 def validate_book_field(publisher):
     MAX_LEN = 300
     if publisher:
         if len(publisher) > MAX_LEN:
-            raise UserInputError(f"Journal must be at most {MAX_LEN} characters long")
+            raise UserInputError(f"Publisher must be at most {MAX_LEN} characters long")
 
 def validate_inproceedings_field(booktitle):
     MAX_LEN = 300
