@@ -90,7 +90,7 @@ def update_ref(ref_id, ref_type, author, title, year, booktitle, journal, volume
         "publisher": publisher,
         "booktitle": booktitle
     }
-    sql = text("""UPDATE citations SET type = :ref_type, author = :author, title = :title, year = :year, 
+    sql = text("""UPDATE citations SET type = :type, author = :author, title = :title, year = :year, 
             journal = :journal, volume= :volume, pages = :pages, publisher = :publisher, booktitle = :booktitle 
             WHERE id = :ref_id""")
         

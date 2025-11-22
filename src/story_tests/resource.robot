@@ -45,19 +45,32 @@ Open Reference List Page
     Go To  ${REF_LIST_URL}
 
 Fill Reference Form
-    [Arguments]  ${type}  ${author}  ${title}  ${year}
+    [Arguments]  ${type}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
     Select From List By Value  name=ref_type  ${type}
     Input Text  name=ref_author  ${author}
     Input Text  name=ref_title  ${title}
     Input Text  name=ref_year  ${year}
 
+    Input Text If Visible  name=ref_journal  ${journal}
+    Input Text If Visible  name=ref_volume  ${volume}
+    Input Text If Visible  name=ref_pages  ${pages}
+    Input Text If Visible  name=ref_publisher  ${publisher}
+    Input Text If Visible  name=ref_booktitle  ${booktitle}
+
+Input Text If Visible
+    [Arguments]  ${locator}  ${value}
+    Run Keyword If  '${value}' == 'None'  Return From Keyword
+    ${visible}=  Run Keyword And Return Status  Element Should Be Visible  ${locator}
+    Run Keyword If  ${visible}  Input Text  ${locator}  ${value}
+
+
 Submit Reference
     Click Button  name=ref_submit
 
 Create Reference
-    [Arguments]  ${type}  ${author}  ${title}  ${year}
+    [Arguments]  ${type}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
     Open New Reference Page
-    Fill Reference Form  ${type}  ${author}  ${title}  ${year}
+    Fill Reference Form  ${type}  ${author}  ${title}  ${year}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
     Submit Reference
 
 Filter References By Selection
@@ -76,3 +89,8 @@ No Error Messages
     Page Should Not Contain  Invalid reference type
     Page Should Not Contain  Year must be an integer
     Page Should Not Contain  Invalid year
+    Page Should Not Contain  Volume must be an integer
+    Page Should Not Contain  Pages must be at most 300 characters long
+    Page Should Not Contain  Journal must be at most 300 characters long
+    Page Should Not Contain  Publisher must be at most 300 characters long
+    Page Should Not Contain  Booktitle must be at most 300 characters long
