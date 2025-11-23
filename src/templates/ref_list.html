@@ -49,9 +49,14 @@ See all the citations
         <td style="padding: 10px;">{{ ref.title }}</td>
         <td style="padding: 10px;">{{ ref.year }}</td>
         <td style="padding: 10px;">
-            <form action="/edit_ref/{{ ref.id }}" method="get">
-                <input type="submit" value="Muokkaa">
-            </form>
+            <div style="display:flex; gap:5px; justify-content:center ; align-items:center;">
+                <form action="/edit_ref/{{ ref.id }}" method="get">
+                    <input type="submit" value="Muokkaa">
+                </form>
+                <form action="/delete_ref/{{ ref.id }}" method="post">
+                    <input type="submit" value="Poista">
+                </form>
+            </div>
         </td>
     </tr>
     {% endfor %}

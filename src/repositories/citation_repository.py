@@ -98,3 +98,8 @@ def update_ref(ref_id, ref_type, keyword, author, title, year, journal=None, vol
         
     db.session.execute(sql, params)
     db.session.commit()
+
+def delete_ref(ref_id):
+    sql = text("DELETE FROM citations WHERE id = :ref_id")
+    db.session.execute(sql, {"ref_id": ref_id})
+    db.session.commit()

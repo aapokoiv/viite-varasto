@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash, abort
 from db_helper import reset_db
-from repositories.citation_repository import get_citations, get_filters, create_ref, get_citation_by_id, update_ref
+from repositories.citation_repository import get_citations, get_filters, create_ref, get_citation_by_id, update_ref, delete_ref
 from config import app, test_env
 from util import validate_ref, validate_article_fields
 
@@ -92,6 +92,14 @@ def ref_edit(ref_id):
             flash(str(error))
             return redirect("/edit_ref/"+ str(ref_id))
         return redirect("/view_refs")
+
+@app.route("/delete_ref/<int:ref_id>", methods=["POST"])
+def ref_delete(ref_id):
+    ref = get_citation_by_id(ref_id)
+    if not ref:
+        abort(404)
+    delete_ref(ref.id)
+    return redirect("/view_refs")
 
 # testausta varten oleva reitti
 if test_env:
