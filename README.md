@@ -1,5 +1,7 @@
 ## Viite Varasto
 
+[![CI](https://github.com/aapokoiv/viite-varasto/actions/workflows/ci.yaml/badge.svg)](https://github.com/aapokoiv/viite-varasto/actions/workflows/ci.yaml)
+
 Backlogi: [täällä](https://helsinkifi-my.sharepoint.com/:x:/g/personal/aapokoiv_ad_helsinki_fi/IQDEuVCXAv8rSYSaMAgaQt6zAbibmJOpDFhpTtWDTGlsCXM?e=8AC0gf)
 
 **Definition of done** 
