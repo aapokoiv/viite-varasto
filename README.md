@@ -25,6 +25,15 @@ TEST_ENV=true
 SECRET_KEY=satunnainen_merkkijono
 ```
 
+**Testaaminen**
+
+- Aja testit läpi seuraavilla komennoilla:
+
+  ```bash
+  pytest
+  robot --variable HEADLESS:true src/story_tests
+  ```
+
 **Tietokannan alustaminen**
 
 - Aja `db_helper.py` projektin juuressa `setup` argumentilla:
