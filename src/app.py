@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, jsonify, flash, abort
+from flask import redirect, render_template, request, jsonify, flash, abort, url_for
 from db_helper import reset_db
 from repositories.citation_repository import get_citations, get_filters, create_ref, get_citation_by_id, update_ref, delete_ref
 from config import app, test_env
@@ -54,8 +54,10 @@ def ref_creation():
         if ref_type == "article":
             volume = validate_article_fields(journal, volume, pages)
         year_int = validate_ref(ref_type, keyword, author, title, year)
-        create_ref(ref_type, keyword, author, title, year_int, journal, volume, pages, publisher, booktitle)
-        return redirect("/")
+        create_ref(ref_type, keyword, author, title, year_int)
+
+        flash("Reference succesfully created.", "success")
+        return redirect(url_for('index'))
     except Exception as error:
         flash(str(error))
         return redirect("/new_ref")
@@ -91,6 +93,8 @@ def ref_edit(ref_id):
         except Exception as error:
             flash(str(error))
             return redirect("/edit_ref/"+ str(ref_id))
+        
+        flash("Reference succesfully edited.", "success")
         return redirect("/view_refs")
 
 @app.route("/delete_ref/<int:ref_id>", methods=["POST"])
@@ -99,6 +103,7 @@ def ref_delete(ref_id):
     if not ref:
         abort(404)
     delete_ref(ref.id)
+    flash("Reference succesfully deleted.", "success")
     return redirect("/view_refs")
 
 # testausta varten oleva reitti

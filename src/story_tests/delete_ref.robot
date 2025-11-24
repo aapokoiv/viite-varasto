@@ -19,6 +19,12 @@ Delete Right Reference Successfully
     Page Should Not Contain  delete-title
     Page Should Contain  keep-title
 
+Delete Reference Notification Is Displayed On Screen
+    Create Reference  book  delete-kw  delete-author  delete-title  2010  publisher=publisher  volume=2  pages=30-40
+    Open Reference List Page
+    Click Delete Button  delete-title
+    Page Should Contain  Reference succesfully deleted.
+
 
 *** Keywords ***
 Click Delete Button

@@ -49,6 +49,11 @@ Edit Article With Volume As Text
     Edit Reference  article  art-kw  testAuthor1  testTitle1  2020  volume=ysi
     Page Should Contain  Volume must be an integer
 
+Edit Reference Notification Is Displayed On Screen
+    Create New Reference And Navigate To List Page
+    Edit Reference  article  art-kw  testAuthor1  testTitle1  2020
+    Page Should Contain  Reference succesfully edited.
+
 
 *** Keywords ***
 Create New Reference And Navigate To List Page

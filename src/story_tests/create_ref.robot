@@ -54,3 +54,6 @@ Create Reference With Non-integer Year
     Create Reference  misc  year-kw  Maija  Testi  year2020
     Page Should Contain  Year must be an integer
 
+Create Reference Notification Is Displayed On Screen
+    Create Reference  misc  year-kw  Maija  Testi  22
+    Page Should Contain  Reference succesfully created.
