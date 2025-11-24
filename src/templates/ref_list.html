@@ -13,7 +13,7 @@ See all the citations
     <span>Filter references:</span>
     <form action="/view_refs" method="get" autocomplete="off">
         Search:
-        <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Etsi viitettä..." maxlength="300">
+        <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for refrerences..." maxlength="300">
         Type:
         <select name="type">
             {% for type in available_filters["types"] %}
@@ -52,10 +52,10 @@ See all the citations
         <td>
             <div class="actions">
                 <form class="action-form" action="/edit_ref/{{ ref.id }}" method="get">
-                    <input type="submit" value="Muokkaa">
+                    <input type="submit" value="Edit">
                 </form>
                 <form class="action-form delete" action="/delete_ref/{{ ref.id }}" method="post">
-                    <input type="submit" value="Poista">
+                    <input type="submit" value="Delete">
                 </form>
             </div>
         </td>

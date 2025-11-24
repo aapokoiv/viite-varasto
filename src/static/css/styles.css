@@ -22,12 +22,19 @@ h2 {
 
 /* Links and buttons */
 a {
-	color: #0b6fa4;
+	background: #0b6fa4;
+	color: #fff;
 	text-decoration: none;
 	margin-right: 12px;
+	padding: 8px 12px;
+	border-radius: 4px;
+	display: inline-block;
 }
 
-a:hover { text-decoration: underline; }
+a:hover {
+	background: #095a86;
+	text-decoration: none;
+}
 
 button, input[type="submit"] {
 	background: #0b6fa4;

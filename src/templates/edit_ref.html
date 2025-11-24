@@ -7,67 +7,89 @@ Edit reference
 {% block body %}
 
 <h2>Edit reference</h2>
-
-<div>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="notif-container">
+    <ul class="flash-list">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <li class="flash">{{ message }}</li>
         {% endfor %}
     </ul>
-    {% endif %}
-    {% endwith %}
-    <form action="/edit_ref/{{ ref.id }}" method="get">
+</div>
+{% endif %}
+{% endwith %}
+
+<form action="/edit_ref/{{ ref.id }}" method="get" class="form-row">
         <label for="ref_type">Type:</label>
         <select id="ref_type" name="ref_type" required onchange="this.form.submit()">
-            <option value="article" {% if option=="article" %}selected{% endif %}>Article</option>
-            <option value="book" {% if option=="book" %}selected{% endif %}>Book</option>
-            <option value="inproceedings" {% if option=="inproceedings" %}selected{% endif %}>Inproceedings
-            </option>
-            <option value="misc" name="option" {% if option=="misc" %}selected{% endif %}>Misc</option>
+                <option value="article" {% if option=="article" %}selected{% endif %}>Article</option>
+                <option value="book" {% if option=="book" %}selected{% endif %}>Book</option>
+                <option value="inproceedings" {% if option=="inproceedings" %}selected{% endif %}>Inproceedings</option>
+                <option value="misc" name="option" {% if option=="misc" %}selected{% endif %}>Misc</option>
         </select>
-    </form>
-    <form action="/edit_ref/{{ ref.id }}" method="post">
-        <input type="hidden" name="ref_type" value="{{ option }}">
+</form>
 
-        <label for="ref_keyword">Keyword:</label>
-        <input type="text" id="ref_keyword" name="ref_keyword" value="{{ ref.keyword }}" required>
+<form action="/edit_ref/{{ ref.id }}" method="post" class="container" autocomplete="off">
+    <input type="hidden" name="ref_type" value="{{ option }}">
+    <div class="form-grid">
+        <div class="form-row">
+            <label for="ref_keyword">Keyword:</label>
+            <input type="text" id="ref_keyword" name="ref_keyword" value="{{ ref.keyword }}" required>
+        </div>
 
-        <label for="ref_author">Author:</label>
-        <input type="text" id="ref_author" name="ref_author" value="{{ ref.author }}" required>
+        <div class="form-row">
+            <label for="ref_author">Author:</label>
+            <input type="text" id="ref_author" name="ref_author" value="{{ ref.author }}" required class="big-text-input">
+        </div>
 
-        <label for="ref_title">Title:</label>
-        <input type="text" id="ref_title" name="ref_title" value="{{ ref.title }}" required />
+        <div class="form-row">
+            <label for="ref_title">Title:</label>
+            <input type="text" id="ref_title" name="ref_title" value="{{ ref.title }}" required class="big-text-input" />
+        </div>
 
-        <label for="ref_year">Year:</label>
-        <input type="text" id="ref_year" name="ref_year" value="{{ ref.year }}" required>
+        <div class="form-row">
+            <label for="ref_year">Year:</label>
+            <input type="text" id="ref_year" name="ref_year" value="{{ ref.year }}" required>
+        </div>
 
         {% if option=="article" %}
-        <label for="ref_journal">*Journal:</label>
-        <input type="text" id="ref_journal" name="ref_journal" value="{{ ref.journal or '' }}">
+        <div class="form-row">
+            <label for="ref_journal">*Journal:</label>
+            <input type="text" id="ref_journal" name="ref_journal" value="{{ ref.journal or '' }}">
+        </div>
 
-        <label for="ref_volume">*Volume:</label>
-        <input type="text" id="ref_volume" name="ref_volume" value="{{ ref.volume or '' }}">
+        <div class="form-row">
+            <label for="ref_volume">*Volume:</label>
+            <input type="text" id="ref_volume" name="ref_volume" value="{{ ref.volume or '' }}">
+        </div>
 
-        <label for="ref_pages">*Pages:</label>
-        <input type="text" id="ref_pages" name="ref_pages" value="{{ ref.pages or '' }}">
+        <div class="form-row">
+            <label for="ref_pages">*Pages:</label>
+            <input type="text" id="ref_pages" name="ref_pages" value="{{ ref.pages or '' }}">
+        </div>
         {% endif %}
 
         {% if option=="book" %}
-        <label for="ref_publisher">*Publisher:</label>
-        <input type="text" id="ref_publisher" name="ref_publisher" value="{{ ref.publisher or '' }}">
+        <div class="form-row">
+            <label for="ref_publisher">*Publisher:</label>
+            <input type="text" id="ref_publisher" name="ref_publisher" value="{{ ref.publisher or '' }}">
+        </div>
         {% endif %}
 
         {% if option=="inproceedings" %}
-        <label for="ref_booktitle">*Booktitle:</label>
-        <input type="text" id="ref_booktitle" name="ref_booktitle" value="{{ ref.booktitle or '' }}">
+        <div class="form-row">
+            <label for="ref_booktitle">*Booktitle:</label>
+            <input type="text" id="ref_booktitle" name="ref_booktitle" value="{{ ref.booktitle or '' }}" class="big-text-input">
+        </div>
         {% endif %}
-        <br>
-        <button type="submit" name="ref_edit">
-            Edit
-        </button>
-    </form>
-</div>
+    </div>
+    <br>
+    <div>
+        <button type="submit" name="ref_edit">Confirm</button>
+    </div>
+</form>
+
+<br>
+<a href="/">Back</a>
 
 {% endblock %}
