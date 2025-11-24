@@ -9,12 +9,12 @@ See all the citations
 <h2>View all the references</h2>
 
 <!-- Filtering -->
-<div style="margin-bottom: 10px;">
-    <span style="font-size: 20px;">Filter references:</span>
+<div class="filter-container">
+    <span>Filter references:</span>
     <form action="/view_refs" method="get" autocomplete="off">
-        Search: 
+        Search:
         <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Etsi viitettä..." maxlength="300">
-        Type: 
+        Type:
         <select name="type">
             {% for type in available_filters["types"] %}
                 <option value="{{ type }}" {% if active_filters.type == type %}selected{% endif %}>
@@ -22,38 +22,39 @@ See all the citations
                 </option>
             {% endfor %}
         </select>
-        <button type="submit" >Filter</button>
+        <button type="submit">Filter</button>
     </form>
 </div>
 
 {% if refs %}
 <!-- References -->
-<table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align: center;">
-    <tr style="background: #f4f4f4; text-transform: uppercase; border-bottom: 2px solid #ccc;">
-        <th style="padding: 12px;">ID</th>
-        <td style="padding: 12px;">Keyword</td>
-        <th style="padding: 12px;">Type</th>
-        <th style="padding: 12px;">Author</th>
-        <th style="padding: 12px;">Title</th>
-        <th style="padding: 12px;">Year</th>
-        <th style="padding: 12px;">Actions</th>
+<table class="refs-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Keyword</th>
+        <th>Type</th>
+        <th>Author</th>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Actions</th>
     </tr>
+    </thead>
 
     {% for ref in refs %}
-    <tr style="border-bottom: 1px solid #ddd;" onmouseover="this.style.backgroundColor='#eef7ff'"
-        onmouseout="this.style.backgroundColor=''">
-        <td style="padding: 10px;">{{ ref.id }}</td>
-        <td style="padding: 10px;">{{ ref.keyword }}</td>
-        <td style="padding: 10px;">{{ ref.type }}</td>
-        <td style="padding: 10px;">{{ ref.author }}</td>
-        <td style="padding: 10px;">{{ ref.title }}</td>
-        <td style="padding: 10px;">{{ ref.year }}</td>
-        <td style="padding: 10px;">
-            <div style="display:flex; gap:5px; justify-content:center ; align-items:center;">
-                <form action="/edit_ref/{{ ref.id }}" method="get">
+    <tr>
+        <td>{{ ref.id }}</td>
+        <td>{{ ref.keyword }}</td>
+        <td>{{ ref.type }}</td>
+        <td>{{ ref.author }}</td>
+        <td>{{ ref.title }}</td>
+        <td>{{ ref.year }}</td>
+        <td>
+            <div class="actions">
+                <form class="action-form" action="/edit_ref/{{ ref.id }}" method="get">
                     <input type="submit" value="Muokkaa">
                 </form>
-                <form action="/delete_ref/{{ ref.id }}" method="post">
+                <form class="action-form delete" action="/delete_ref/{{ ref.id }}" method="post">
                     <input type="submit" value="Poista">
                 </form>
             </div>
@@ -63,7 +64,7 @@ See all the citations
 </table>
 
 <!-- Page Navigation -->
-<div style="margin-top: 20px; text-align: center;">
+<div class="pagination">
     {% if page > 1 %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1) }}">« Previous</a>
     {% endif %}

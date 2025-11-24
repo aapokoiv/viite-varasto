@@ -16,56 +16,74 @@ Create a new todo
 </ul>
 {% endif %}
 {% endwith %}
-<form action="/new_ref" method="get">
+<form action="/new_ref" method="get" class="type-form">
   <label for="ref_type">Type:</label>
   <select id="ref_type" name="ref_type" required onchange="this.form.submit()">
     <option value="article" {% if option=="article" %}selected{% endif %}>Article</option>
     <option value="book" {% if option=="book" %}selected{% endif %}>Book</option>
-    <option value="inproceedings" {% if option=="inproceedings" %}selected{% endif %}>Inproceedings
-    </option>
+    <option value="inproceedings" {% if option=="inproceedings" %}selected{% endif %}>Inproceedings</option>
     <option value="misc" name="option" {% if option=="misc" %}selected{% endif %}>Misc</option>
   </select>
 </form>
-<form action="/create_ref" method="post">
+
+<form action="/create_ref" method="post" class="new-ref-form container" autocomplete="off">
   <input type="hidden" name="ref_type" value="{{ option }}">
+  <div class="form-grid">
+    <div class="form-row">
+      <label for="ref_keyword">Keyword:</label>
+      <input type="text" id="ref_keyword" name="ref_keyword">
+    </div>
 
-  <label for="ref_keyword">Keyword:</label>
-  <input type="text" id="ref_keyword" name="ref_keyword">
+    <div class="form-row">
+      <label for="ref_author">Author:</label>
+      <input type="text" id="ref_author" name="ref_author">
+    </div>
 
-  <label for="ref_author">Author:</label>
-  <input type="text" id="ref_author" name="ref_author">
+    <div class="form-row">
+      <label for="ref_title">Title:</label>
+      <input type="text" id="ref_title" name="ref_title">
+    </div>
 
-  <label for="ref_title">Title:</label>
-  <input type="text" id="ref_title" name="ref_title">
+    <div class="form-row">
+      <label for="ref_year">Year:</label>
+      <input type="text" id="ref_year" name="ref_year">
+    </div>
 
-  <label for="ref_year">Year:</label>
-  <input type="text" id="ref_year" name="ref_year">
+    {% if option=="article" %}
+    <div class="form-row">
+      <label for="ref_journal">*Journal:</label>
+      <input type="text" id="ref_journal" name="ref_journal">
+    </div>
 
-  {% if option=="article" %}
-  <label for="ref_journal">*Journal:</label>
-  <input type="text" id="ref_journal" name="ref_journal">
+    <div class="form-row">
+      <label for="ref_volume">*Volume:</label>
+      <input type="text" id="ref_volume" name="ref_volume">
+    </div>
 
-  <label for="ref_volume">*Volume:</label>
-  <input type="text" id="ref_volume" name="ref_volume">
+    <div class="form-row">
+      <label for="ref_pages">*Pages:</label>
+      <input type="text" id="ref_pages" name="ref_pages">
+    </div>
+    {% endif %}
 
-  <label for="ref_pages">*Pages:</label>
-  <input type="text" id="ref_pages" name="ref_pages">
-  {% endif %}
+    {% if option=="book" %}
+    <div class="form-row">
+      <label for="ref_publisher">*Publisher:</label>
+      <input type="text" id="ref_publisher" name="ref_publisher">
+    </div>
+    {% endif %}
 
-  {% if option=="book" %}
-  <label for="ref_publisher">*Publisher:</label>
-  <input type="text" id="ref_publisher" name="ref_publisher">
-  {% endif %}
+    {% if option=="inproceedings" %}
+    <div class="form-row">
+      <label for="ref_booktitle">*Booktitle:</label>
+      <input type="text" id="ref_booktitle" name="ref_booktitle">
+    </div>
+    {% endif %}
+  </div>
 
-  {% if option=="inproceedings" %}
-  <label for="ref_booktitle">*Booktitle:</label>
-  <input type="text" id="ref_booktitle" name="ref_booktitle">
-  {% endif %}
-
-  <br>
-  <button type="submit" name="ref_submit">
-    Add
-  </button>
+  <div style="margin-top:12px;">
+    <button type="submit" name="ref_submit">Add</button>
+  </div>
 </form>
 <br>
 <a href="/">Back</a>
