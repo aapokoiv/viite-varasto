@@ -39,10 +39,6 @@ button, input[type="submit"] {
 	font-size: 14px;
 }
 
-button.secondary {
-	background: #f44336;
-}
-
 /* Flash messages */
 .notif-container {
 	display: flex;
@@ -118,23 +114,34 @@ button.secondary {
 /* Form layout for new/edit references */
 .form-grid {
 	display: flex;
+    flex-direction: column;
 	flex-wrap: wrap;
 	gap: 12px;
 }
 
 .form-row {
-	flex: 1 1 220px;
+	flex: 1 1 auto;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	gap: 6px;
 }
 
-label { font-weight: 600; font-size: 14px; }
+label { 
+    font-weight: 600; 
+    font-size: 14px; 
+    display: flex;
+    align-items: center;
+}
+
 input[type="text"], input[type="search"], select {
 	padding: 8px;
 	border: 1px solid #d6dbe0;
 	border-radius: 4px;
 	font-size: 14px;
+}
+
+input[type="text"] {
+    width: 200px;
 }
 
 /* Responsive tweaks */
@@ -144,4 +151,7 @@ input[type="text"], input[type="search"], select {
 	.refs-table th, .refs-table td { padding: 8px; }
 }
 
-.back-link { display: inline-block; margin-top: 12px; color: #0b6fa4; }
+.big-text-input {
+    display: flex;
+    flex: 1 1 auto;
+}
