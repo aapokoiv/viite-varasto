@@ -5,7 +5,7 @@
 Backlogi: [täällä](https://helsinkifi-my.sharepoint.com/:x:/g/personal/aapokoiv_ad_helsinki_fi/IQDEuVCXAv8rSYSaMAgaQt6zAbibmJOpDFhpTtWDTGlsCXM?e=8AC0gf)
 
 **Definition of done** 
-- Ominaisuus on valmis, kun se on suunniteltu, toteutettu, testattu ja dokumentoitu siten, että se toteuttaa kaikki osan vaatimukset
+- Ominaisuus on valmis, kun se on suunniteltu, toteutettu, testattu, dokumentoitu ja puskettu main haaralle siten, että se toteuttaa user storyn hyväksymiskriteerit
 
 **Asennus**
 
