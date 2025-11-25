@@ -15,15 +15,25 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         missing-module-docstring,
         missing-function-docstring,
-        missing-class-docstring
+        missing-class-docstring,
+        C0114,C0115,C0116,
+        too-many-arguments,
+        too-many-instance-attributes,
+        too-few-public-methods
 
 [FORMAT]
 
-max-line-length = 100
+max-line-length = 150
 indent-after-paren = 4
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,id
+
+[DESIGN]
+max-args=14
+max-attributes=14
+min-public-methods=0
 
 [REFACTORING]
 
 max-nested-blocks = 2
-
-[DESIGN]

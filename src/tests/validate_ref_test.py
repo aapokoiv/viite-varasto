@@ -1,9 +1,6 @@
 import unittest
-from util import (
-    validate_ref,
-    validate_article_fields,
-    UserInputError,
-)
+
+from util import UserInputError, validate_article_fields, validate_ref
 
 
 class TestRefValidation(unittest.TestCase):

@@ -1,12 +1,23 @@
-from config import db
 from sqlalchemy import text
 
+from config import db
 from entities.citation import Citation
+
 
 def get_citation_by_id(ref_id):
     sql = text("SELECT * FROM citations WHERE id = :ref_id")
     result = db.session.execute(sql, {"ref_id": ref_id}).fetchone()
-    return Citation(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10]) if result else None
+    return Citation(result[0],
+                    result[1],
+                    result[2],
+                    result[3],
+                    result[4],
+                    result[5],
+                    result[6],
+                    result[7],
+                    result[8],
+                    result[9],
+                    result[10]) if result else None
 
 def get_citations(page: int=1, per_page: int=10, filters = None):
     filters = {"query":"","type":""} if filters is None else filters
@@ -23,7 +34,7 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
         count_sql += " AND type = :type"
 
     sql += " ORDER BY id LIMIT :limit OFFSET :offset"
-    
+
     result = db.session.execute(text(sql), {
         "limit": per_page,
         "offset": offset,
@@ -37,7 +48,7 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
 
     infos = result.fetchall()
     total = count_result.scalar()
-    
+
     return {
         "items": [Citation(info[0], info[1], info[2], info[3], info[4], info[5]) for info in infos],
         "total": total,
@@ -92,10 +103,10 @@ def update_ref(ref_id, ref_type, keyword, author, title, year, journal=None, vol
         "publisher": publisher,
         "booktitle": booktitle
     }
-    sql = text("""UPDATE citations SET type = :type, keyword = :keyword, author = :author, title = :title, year = :year, 
+    sql = text("""UPDATE citations SET type = :type, keyword = :keyword, author = :author, title = :title, year = :year,
             journal = :journal, volume= :volume, pages = :pages, publisher = :publisher, booktitle = :booktitle 
             WHERE id = :ref_id""")
-        
+
     db.session.execute(sql, params)
     db.session.commit()
 
