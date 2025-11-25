@@ -1,4 +1,5 @@
 from flask import abort, flash, jsonify, redirect, render_template, request, url_for
+from sqlalchemy.exc import SQLAlchemyError
 
 from config import app, test_env
 from db_helper import reset_db
@@ -10,7 +11,7 @@ from repositories.citation_repository import (
     get_filters,
     update_ref,
 )
-from util import validate_article_fields, validate_ref
+from util import UserInputError, validate_article_fields, validate_ref
 
 
 @app.route("/")
@@ -66,13 +67,18 @@ def ref_creation():
         if ref_type == "article":
             volume = validate_article_fields(journal, volume, pages)
         year_int = validate_ref(ref_type, keyword, author, title, year)
-        create_ref(ref_type, keyword, author, title, year_int)
-
-        flash("Reference succesfully created.", "success")
-        return redirect(url_for('index'))
-    except Exception as error:
+    except UserInputError as error:
         flash(str(error))
         return redirect("/new_ref")
+
+    try:
+        create_ref(ref_type, keyword, author, title, year_int, journal, volume, pages, publisher, booktitle)
+    except SQLAlchemyError:
+        flash("Database error while creating reference")
+        return redirect("/new_ref")
+
+    flash("Reference succesfully created.", "success")
+    return redirect(url_for('index'))
 
 
 @app.route("/edit_ref/<int:ref_id>", methods=["GET", "POST"])
@@ -102,14 +108,21 @@ def ref_edit(ref_id):
             if ref_type == "article":
                 volume = validate_article_fields(journal, volume, pages)
             year_int = validate_ref(ref_type, keyword, author, title, year)
+        except UserInputError as error:
+            flash(str(error))
+            return redirect("/edit_ref/" + str(ref_id))
+
+        try:
             update_ref(ref.id, ref_type, keyword, author, title,
                        year_int, journal, volume, pages, publisher, booktitle)
-        except Exception as error:
-            flash(str(error))
+        except SQLAlchemyError:
+            flash("Database error while updating reference")
             return redirect("/edit_ref/" + str(ref_id))
 
         flash("Reference succesfully edited.", "success")
         return redirect("/view_refs")
+
+    return redirect(url_for('ref_list'))
 
 
 @app.route("/delete_ref/<int:ref_id>", methods=["POST"])

@@ -27,13 +27,14 @@ max-line-length = 150
 indent-after-paren = 4
 
 [BASIC]
-good-names=i,j,k,ex,Run,_,id
+good-names=i,j,k,id,type
 
 [DESIGN]
 max-args=14
 max-attributes=14
 min-public-methods=0
+max-positional-arguments=15
 
 [REFACTORING]
 
-max-nested-blocks = 2
+max-nested-blocks = 4

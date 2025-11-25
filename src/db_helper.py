@@ -10,8 +10,8 @@ from repositories.citation_repository import create_ref
 
 
 def reset_db():
-    print(f"Clearing contents from table citations")
-    sql = text(f"DELETE FROM citations")
+    print("Clearing contents from table citations")
+    sql = text("DELETE FROM citations")
     db.session.execute(sql)
     db.session.commit()
 
@@ -46,7 +46,7 @@ def setup_db():
 
     # Read schema from schema.sql file
     schema_path = os.path.join(os.path.dirname(__file__), "schema.sql")
-    with open(schema_path, "r") as f:
+    with open(schema_path, "r", encoding="utf-8") as f:
         schema_sql = f.read().strip()
 
     sql = text(schema_sql)
@@ -62,8 +62,9 @@ def create_test_data(amount: int = 50):
         create_ref(
             random.choice(types),
             "".join(random.choices(string.ascii_letters, k=10)),
+            "".join(random.choices(string.ascii_letters, k=15)),
             "".join(random.choices(string.ascii_letters, k=20)),
-            random.randrange(1, 2025),
+            random.randrange(1900, 2025),
         )
     print("Data creation complete.")
 

@@ -23,14 +23,14 @@ def validate_ref(ref_type, keyword, author, title, year):
     try:
         year_int = int(year)
     except (TypeError, ValueError):
-        raise UserInputError("Year must be an integer")
+        raise UserInputError("Year must be an integer") from None
 
     return year_int
 
-def validate_article_fields(journal, volume, pages):
+def validate_article_fields(journal, volume, pages):    # pylint: disable=unused-argument
     if volume:
         try:
             volume = int(volume)
         except (TypeError, ValueError):
-            raise UserInputError("Volume must be an integer")
+            raise UserInputError("Volume must be an integer") from None
     return volume
