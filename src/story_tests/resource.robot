@@ -21,7 +21,7 @@ Open And Configure Browser
         Call Method  ${options}  add_argument  --private-window
     END
     IF  $HEADLESS == 'true'
-        Set Selenium Speed  0.01 seconds
+        Set Selenium Speed  0.1 seconds
         Call Method  ${options}  add_argument  --headless
     ELSE
         Set Selenium Speed  ${DELAY}
