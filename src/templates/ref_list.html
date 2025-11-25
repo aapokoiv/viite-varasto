@@ -15,7 +15,7 @@ See all the citations
         Search:
         <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for refrerences..." maxlength="300">
         Type:
-        <select name="ref_type">
+        <select id="type" name="type">
             {% for type in available_filters["types"] %}
                 <option value="{{ type }}" {% if active_filters.type == type %}selected{% endif %}>
                     {{ type|capitalize }}

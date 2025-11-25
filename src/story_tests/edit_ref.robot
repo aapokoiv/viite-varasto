@@ -66,7 +66,7 @@ Submit Edit
 
 Fill Edit Form
     [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
-    Select From List By Value  name=ref_type  ${type}
+    Select From List By Value  id=ref_type    ${type}
     Input Text  name=ref_keyword  ${keyword}
     Input Text  name=ref_author  ${author}
     Input Text  name=ref_title  ${title}
