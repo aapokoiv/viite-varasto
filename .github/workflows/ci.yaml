@@ -38,6 +38,10 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install        
+      - name: Install pylint
+        run: poetry run pip install pylint
+      - name: Run pylint
+        run: poetry run pylint --rcfile=src/.pylintrc src
       - name: Run unit tests
         run: poetry run pytest src/tests
       - name: Setup chromedriver
