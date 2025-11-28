@@ -28,7 +28,7 @@ def new():
 @app.route("/view_refs")
 def ref_list():
     page = request.args.get("page", 1, type=int)
-    per_page = 10
+    per_page = request.args.get("ref_amount", 10, type=int)
 
     filters = {
         "query": request.args.get("query", ""),
@@ -43,6 +43,7 @@ def ref_list():
         page=data["page"],
         pages=data["pages"],
         available_filters=get_filters(),
+        per_page=per_page,
         active_filters={
             "query": filters["query"],
             "type": filters["type"]

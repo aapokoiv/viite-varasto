@@ -74,6 +74,16 @@ See all the citations
     {% if page < pages %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1) }}">Next »</a>
     {% endif %}
+
+        <form action="/view_refs" method="get">
+            Showing
+            <select id="ref_amount" name="ref_amount" required onchange="this.form.submit()">
+                <option value=10 {% if per_page==10 %}selected{% endif %}>10</option>
+                <option value=25 {% if per_page==25 %}selected{% endif %}>25</option>
+                <option value=50 {% if per_page==50 %}selected{% endif %}>50</option>
+            </select>
+            references
+        </form>
 </div>
 
 {% else %}
