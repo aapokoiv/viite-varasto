@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/aapokoiv/viite-varasto/actions/workflows/ci.yaml/badge.svg)](https://github.com/aapokoiv/viite-varasto/actions/workflows/ci.yaml)
 
+[![codecov](https://codecov.io/gh/aapokoiv/viite-varasto/graph/badge.svg?token=SWCL3S26WF)](https://codecov.io/gh/aapokoiv/viite-varasto)
+
 Backlogi: [täällä](https://helsinkifi-my.sharepoint.com/:x:/g/personal/aapokoiv_ad_helsinki_fi/IQDEuVCXAv8rSYSaMAgaQt6zAbibmJOpDFhpTtWDTGlsCXM?e=8AC0gf)
 
 **Definition of done** 
