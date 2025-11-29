@@ -66,13 +66,13 @@ See all the citations
 <!-- Page Navigation -->
 <div class="pagination">
     {% if page > 1 %}
-        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1) }}">« Previous</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1, ref_amount=per_page) }}">« Previous</a>
     {% endif %}
 
     Page {{ page }} of {{ pages }}
 
     {% if page < pages %}
-        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1) }}">Next »</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1, ref_amount=per_page) }}">Next »</a>
     {% endif %}
 
         <form action="/view_refs" method="get">
