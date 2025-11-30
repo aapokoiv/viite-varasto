@@ -3,6 +3,14 @@ from sqlalchemy import text
 from config import db
 from entities.citation import Citation
 
+def get_all_citations():
+    sql = text("SELECT * FROM citations")
+    result = db.session.execute(sql)
+    citations = []
+    for row in result.fetchall():
+        citations.append(Citation(row[0], row[1],row[2], row[3], row[4], row[5],
+                                  row[6], row[7], row[8], row[9], row[10]))
+    return citations
 
 def get_citation_by_id(ref_id):
     sql = text("SELECT * FROM citations WHERE id = :ref_id")
