@@ -47,7 +47,12 @@ button, input[type="submit"] {
 }
 
 .selected-page, .selected-page:hover { /* Currently selected page */
-	background-color: #09537ac4;
+	background-color: #0d95df;
+	text-decoration: none;
+}
+
+.disabled, .disabled:hover {
+	background-color: #09527a9d;
 	text-decoration: none;
 }
 

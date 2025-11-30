@@ -12,7 +12,7 @@ from repositories.citation_repository import (
     update_ref
 )
 from repositories.bibtex_repository import all_citations_to_bibtex
-from util import UserInputError, validate_article_fields, validate_ref
+from util import UserInputError, validate_article_fields, validate_ref, get_page_range
 
 
 @app.route("/")
@@ -45,7 +45,7 @@ def ref_list():
         refs=data["items"],
         page=data["page"],
         pages=data["pages"],
-        page_range=(max(1, data["page"] - 2), min(data["pages"], data["page"] + 2)),
+        page_range=get_page_range(data["page"], data["pages"]),
         available_filters=get_filters(),
         per_page=per_page,
         active_filters={
