@@ -1,6 +1,5 @@
 import unittest
 from config import app, db
-# Ensure route decorators in src/app.py run and register endpoints
 import app as app_module
 from db_helper import setup_db, reset_db
 from repositories.citation_repository import create_ref
