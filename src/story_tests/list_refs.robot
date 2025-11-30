@@ -46,6 +46,33 @@ Paging Moves Fiftyfirst Reference When Showing 50
     Page Should Contain  Ref 51
     Page Should Not Contain  Ref 50
 
+Paging Shows First And Last Pages When In Specific Range
+    Create This Many References  70
+    Open Reference List Page
+    Show References  10
+    Page Should Not Contain  Previous
+    Page Should Contain  Next
+    Page Should Not Contain Element  first-page
+    Page Should Contain Element  last-page
+    Go To  ${REF_LIST_URL}?page=4&ref_amount=10
+    Page Should Contain  Next
+    Page Should Contain  Previous
+    Page Should Contain Element  first-page
+    Page Should Contain Element  last-page
+    Go To  ${REF_LIST_URL}?page=7&ref_amount=10
+    Page Should Not Contain  Next
+    Page Should Contain  Previous
+    Page Should Not Contain Element  last-page
+    Page Should Contain Element  first-page
+
+Paging Shows Two Pages Forward And Back From Currently Selected
+    Create This Many References  50
+    Go To  ${REF_LIST_URL}?page=3&ref_amount=10
+    Page Should Contain Element  page-1
+    Page Should Contain Element  page-2
+    Page Should Contain Element  page-4
+    Page Should Contain Element  page-5
+
 
 *** Keywords ***
 Show References

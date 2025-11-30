@@ -68,7 +68,7 @@ See all the citations
     {% if page > 1 %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1, ref_amount=per_page) }}">« Previous</a>
         {% if page > 3 %}
-            <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=1, ref_amount=per_page) }}">1</a>
+            <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=1, ref_amount=per_page) }}">1</a>
             <span class="pagination-dots">...</span>
         {% endif %}
     {% endif %}
@@ -77,14 +77,14 @@ See all the citations
         {% if i == page %}
             <a class="selected-page">{{ i }}</a>
         {% else %}
-            <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=i, ref_amount=per_page) }}">{{ i }}</a>
+            <a id="page-{{ i }}" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=i, ref_amount=per_page) }}">{{ i }}</a>
         {% endif %}
     {% endfor %}
 
     {% if page < pages %}
         {% if page < pages - 2 %}
             <span class="pagination-dots">...</span>
-            <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
+            <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
         {% endif %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1, ref_amount=per_page) }}">Next »</a>
     {% endif %}
