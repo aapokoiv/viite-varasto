@@ -1,7 +1,7 @@
 from repositories.citation_repository import get_all_citations
 
 def citation_to_bibtex(citation):
-    fields = { 
+    fields = {
         "author": citation.author,
         "title": citation.title,
         "year": citation.year,
@@ -16,7 +16,7 @@ def citation_to_bibtex(citation):
     for key, value in fields.items():
         if value is not None:
             lines.append(f"  {key} = {{{value}}},")
-    
+
     lines[-1] = lines[-1].rstrip(",")
     lines.append("}")
     return "\n".join(lines)
