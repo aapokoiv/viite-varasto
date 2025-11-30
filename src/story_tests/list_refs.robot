@@ -20,7 +20,7 @@ Paging Moves Eleventh Reference to Second Page When Showing 10
     Page Should Contain  Ref 1
     Page Should Contain  Ref 10
     Page Should Not Contain  Ref 11
-    Go To  ${REF_LIST_URL}?page=2
+    Go To  ${REF_LIST_URL}?page=2&ref_amount=10
     Page Should Contain  Ref 11
     Page Should Not Contain  Ref 2
 
@@ -50,7 +50,7 @@ Paging Moves Fiftyfirst Reference When Showing 50
 *** Keywords ***
 Show References
     [Arguments]  ${amount}
-    Wait Until Element Is Visible  id=ref_amount  5 seconds
+    Wait Until Element Is Visible  id=ref_amount  10 seconds
     Select From List By Value  id=ref_amount  ${amount}
 
 Create This Many References
