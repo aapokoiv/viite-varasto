@@ -44,6 +44,7 @@ Open New Reference Page
 
 Open Reference List Page
     Go To  ${REF_LIST_URL}
+    Wait Until Page Contains Element  class=refs-table  30 seconds
 
 Fill Reference Form
     [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
