@@ -1,7 +1,7 @@
 import unittest
 from config import app, db
 from db_helper import setup_db, reset_db
-from repositories.citation_repository import get_citations, create_ref
+from repositories.citation_repository import get_citations, create_ref, get_all_citations
 
 
 class TestGetCitations(unittest.TestCase):
@@ -57,6 +57,15 @@ class TestGetCitations(unittest.TestCase):
             self.assertEqual(len(result["items"]), 2)
             self.assertEqual(result["page"], 2)
 
+    def test_get_all_citations_returns_created(self):
+        with app.app_context():
+            create_ref("article", "kw1", "Author 1", "Title 1", 2020)
+            create_ref("book", "kw2", "Author 2", "Title 2", 2021)
+            citations = get_all_citations()
+            self.assertEqual(len(citations), 2)
+            titles = {citation.title for citation in citations}
+            self.assertIn("Title 1", titles)
+            self.assertIn("Title 2", titles)
 
 if __name__ == "__main__":
     unittest.main()

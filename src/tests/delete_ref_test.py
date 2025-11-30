@@ -46,3 +46,5 @@ class TestDeleteRef(unittest.TestCase):
             after_count = get_citations()["total"]
             self.assertEqual(before_count, after_count)
     
+if __name__ == "__main__":
+    unittest.main()
