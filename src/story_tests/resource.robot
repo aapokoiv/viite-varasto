@@ -33,8 +33,8 @@ Reset Todos
     Go To  ${RESET_URL}
 
 Reset Refs
-    Go To  ${RESET_URL}
-    Go To  ${HOME_URL}
+    Wait Until Keyword Succeeds  30  1  Go To  ${RESET_URL}
+    Wait Until Keyword Succeeds  30  1  Go To  ${HOME_URL}
 
 Open Home Page
     Go To  ${HOME_URL}
