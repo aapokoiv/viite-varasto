@@ -85,7 +85,7 @@ See all the citations
 <div class="pagination">
     {% if page > 1 %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1, ref_amount=per_page) }}">« Previous</a>
-        {% if page > 3 %}
+        {% if page > 3 and pages > 5 %}
             <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=1, ref_amount=per_page) }}">1</a>
             <span class="pagination-dots">...</span>
         {% endif %}
@@ -102,7 +102,7 @@ See all the citations
     {% endfor %}
 
     {% if page < pages %}
-        {% if page < pages - 2 %}
+        {% if page < pages - 2 and pages > 5 %}
             <span class="pagination-dots">...</span>
             <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
         {% endif %}
