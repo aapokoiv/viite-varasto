@@ -15,6 +15,7 @@ from repositories.bibtex_repository import all_citations_to_bibtex
 from util import UserInputError, validate_article_fields, validate_ref, get_page_range
 
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
