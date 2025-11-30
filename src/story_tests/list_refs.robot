@@ -50,7 +50,8 @@ Paging Moves Fiftyfirst Reference When Showing 50
 *** Keywords ***
 Show References
     [Arguments]  ${amount}
-    Wait Until Element Is Visible  id=ref_amount  10 seconds
+    Wait Until Page Contains Element  class=refs-table  30 seconds
+    Wait Until Element Is Visible  id=ref_amount  30 seconds
     Select From List By Value  id=ref_amount  ${amount}
 
 Create This Many References
