@@ -61,6 +61,20 @@ See all the citations
                 <form class="action-form delete" action="/delete_ref/{{ ref.id }}" method="post">
                     <input type="submit" value="Poista">
                 </form>
+                <button type="button" class="info-btn"
+                        data-id="{{ ref.id }}"
+                        data-keyword="{{ ref.keyword|e }}"
+                        data-type="{{ ref.type|e }}"
+                        data-author="{{ ref.author|e }}"
+                        data-title="{{ ref.title|e }}"
+                        data-year="{{ ref.year }}"
+                        data-journal="{{ ref.journal or ''|e }}"
+                        data-volume="{{ ref.volume or ''|e }}"
+                        data-pages="{{ ref.pages or ''|e }}"
+                        data-publisher="{{ ref.publisher or ''|e }}"
+                        data-booktitle="{{ ref.booktitle or ''|e }}"
+                >?</button>
+
             </div>
         </td>
     </tr>
@@ -116,5 +130,29 @@ See all the citations
 
 <br>
 <a href="/">Back</a>
+
+<!-- Modal for showing citation details -->
+<div id="refModal" class="modal" aria-hidden="true">
+    <div class="modal-overlay" tabindex="-1"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <h3 id="modal-title">Citation details</h3>
+        <dl class="modal-details">
+            <dt>ID</dt><dd id="m-id"></dd>
+            <dt>Keyword</dt><dd id="m-keyword"></dd>
+            <dt>Type</dt><dd id="m-type"></dd>
+            <dt>Author</dt><dd id="m-author"></dd>
+            <dt>Title</dt><dd id="m-title"></dd>
+            <dt>Year</dt><dd id="m-year"></dd>
+            <dt>Journal</dt><dd id="m-journal"></dd>
+            <dt>Volume</dt><dd id="m-volume"></dd>
+            <dt>Pages</dt><dd id="m-pages"></dd>
+            <dt>Publisher</dt><dd id="m-publisher"></dd>
+            <dt>Booktitle</dt><dd id="m-booktitle"></dd>
+        </dl>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/ref_list.js') }}" defer></script>
 
 {% endblock %}

@@ -174,3 +174,58 @@ input[type="text"] {
     display: flex;
     flex: 1 1 auto;
 }
+
+
+.modal {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.modal-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+	position: relative;
+	background: #fff;
+	padding: 18px 22px;
+	border-radius: 8px;
+	z-index: 1010;
+	max-width: 720px;
+	width: 92%;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+	max-height: 80vh;
+	overflow: auto;
+}
+
+.modal-close {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	background: transparent;
+	border: none;
+	font-size: 26px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.modal-details { margin: 8px 0 0 0; }
+.modal-details dt { font-weight: 700; margin-top: 8px; }
+.modal-details dd { margin: 2px 0 8px 0; color: #334; }
+
+.info-btn {
+	background: #607d8b;
+	color: #fff;
+	border: none;
+	padding: 6px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+}
+.info-btn:hover { background: #546e7a; }
