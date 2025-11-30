@@ -34,3 +34,8 @@ def validate_article_fields(journal, volume, pages):    # pylint: disable=unused
         except (TypeError, ValueError):
             raise UserInputError("Volume must be an integer") from None
     return volume
+
+def get_page_range(page, pages, window=5):
+    start = max(1, min(page - 2, pages - window + 1))
+    end = min(pages, start + window - 1)
+    return range(start, end + 1)

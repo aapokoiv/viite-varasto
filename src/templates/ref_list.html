@@ -71,9 +71,11 @@ See all the citations
             <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=1, ref_amount=per_page) }}">1</a>
             <span class="pagination-dots">...</span>
         {% endif %}
+    {% else %}
+        <a class="disabled">« Previous</a>
     {% endif %}
 
-    {% for i in range(page_range[0], page_range[1] + 1) %}
+    {% for i in page_range %}
         {% if i == page %}
             <a class="selected-page">{{ i }}</a>
         {% else %}
@@ -87,6 +89,8 @@ See all the citations
             <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
         {% endif %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1, ref_amount=per_page) }}">Next »</a>
+    {% else %}
+        <a class="disabled">Next »</a>
     {% endif %}
 
     <div class="ref-amount">
