@@ -37,12 +37,15 @@ def ref_list():
     }
 
     data = get_citations(page, per_page, filters)
+    print(data["page"])
+    print(data["pages"])
 
     return render_template(
         "ref_list.html",
         refs=data["items"],
         page=data["page"],
         pages=data["pages"],
+        page_range=(max(1, data["page"] - 2), min(data["pages"], data["page"] + 2)),
         available_filters=get_filters(),
         per_page=per_page,
         active_filters={

@@ -25,7 +25,7 @@ a {
 	background: #0b6fa4;
 	color: #fff;
 	text-decoration: none;
-	margin-right: 12px;
+	margin: 0 6px;
 	padding: 8px 12px;
 	border-radius: 4px;
 	display: inline-block;
@@ -44,6 +44,11 @@ button, input[type="submit"] {
 	border-radius: 4px;
 	cursor: pointer;
 	font-size: 14px;
+}
+
+.selected-page, .selected-page:hover { /* Currently selected page */
+	background-color: #09537ac4;
+	text-decoration: none;
 }
 
 /* Flash messages */
@@ -117,6 +122,8 @@ button, input[type="submit"] {
 .action-form.delete input[type="submit"] { background: #f44336; }
 
 .pagination { margin-top: 20px; text-align: center; }
+.pagination-dots { color: #0b6fa4; font-size: 30px; }
+.ref-amount { margin-top: 10px;}
 
 /* Form layout for new/edit references */
 .form-grid {

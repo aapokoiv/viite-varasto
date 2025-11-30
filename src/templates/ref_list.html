@@ -71,14 +71,29 @@ See all the citations
 <div class="pagination">
     {% if page > 1 %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1, ref_amount=per_page) }}">« Previous</a>
+        {% if page > 3 %}
+            <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=1, ref_amount=per_page) }}">1</a>
+            <span class="pagination-dots">...</span>
+        {% endif %}
     {% endif %}
 
-    Page {{ page }} of {{ pages }}
+    {% for i in range(page_range[0], page_range[1] + 1) %}
+        {% if i == page %}
+            <a class="selected-page">{{ i }}</a>
+        {% else %}
+            <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=i, ref_amount=per_page) }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
 
     {% if page < pages %}
+        {% if page < pages - 2 %}
+            <span class="pagination-dots">...</span>
+            <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
+        {% endif %}
         <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1, ref_amount=per_page) }}">Next »</a>
     {% endif %}
 
+    <div class="ref-amount">
         <form action="/view_refs" method="get">
             Showing
             <select id="ref_amount" name="ref_amount" required onchange="this.form.submit()">
@@ -88,6 +103,7 @@ See all the citations
             </select>
             references
         </form>
+    </div>
 </div>
 
 {% else %}
