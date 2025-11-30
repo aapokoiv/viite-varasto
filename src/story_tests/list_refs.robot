@@ -72,8 +72,7 @@ Paging Shows Two Pages Forward And Back From Currently Selected
 *** Keywords ***
 Show References
     [Arguments]  ${amount}
-    Wait Until Page Contains Element  class=refs-table  60 seconds
-    Wait Until Element Is Visible  id=ref_amount  60 seconds
+    Wait Until Element Is Visible  id=ref_amount  10 seconds
     Select From List By Value  id=ref_amount  ${amount}
 
 Create This Many References
