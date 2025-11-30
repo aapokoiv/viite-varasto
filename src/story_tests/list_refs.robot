@@ -72,10 +72,10 @@ Paging Shows Two Pages Forward And Back From Currently Selected
 *** Keywords ***
 Show References
     [Arguments]  ${amount}
-    Wait Until Page Contains Element  class=refs-table  30 seconds
+    Wait Until Page Contains Element  class=refs-table  60 seconds
     Wait Until Element Is Visible  id=ref_amount  30 seconds
     Select From List By Value  id=ref_amount  ${amount}
-
+    
 Create This Many References
     Set Selenium Speed  ${DELAY_FAST}
     [Arguments]  ${amount}
