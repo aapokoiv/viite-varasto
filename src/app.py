@@ -1,4 +1,4 @@
-from flask import abort, flash, jsonify, redirect, render_template, request, url_for
+from flask import abort, flash, jsonify, redirect, render_template, request, url_for, Response
 from sqlalchemy.exc import SQLAlchemyError
 
 from config import app, test_env
@@ -9,9 +9,11 @@ from repositories.citation_repository import (
     get_citation_by_id,
     get_citations,
     get_filters,
-    update_ref,
+    update_ref
 )
+from repositories.bibtex_repository import all_citations_to_bibtex
 from util import UserInputError, validate_article_fields, validate_ref, get_page_range
+
 
 
 @app.route("/")
@@ -138,6 +140,14 @@ def ref_delete(ref_id):
     flash("Reference succesfully deleted.", "success")
     return redirect("/view_refs")
 
+@app.route("/export_bibtex")
+def export_bibtex():
+    bibtex_data = all_citations_to_bibtex()
+    return Response(
+        bibtex_data,
+        mimetype="text/plain; charset=utf-8",
+        headers={"Content-Disposition": "attachment;filename=citations.bib"}
+    )
 
 # testausta varten oleva reitti
 if test_env:
