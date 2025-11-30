@@ -8,7 +8,8 @@ Test Setup  Reset Refs
 
 *** Test Cases ***
 Export Button Hidden When No references
-    Open Reference List Page
+    Go To  ${REF_LIST_URL}
+    Wait Until Page Contains  View all the references  10 seconds
     Page Should Not Contain Button  Lataa BibTeX
 
 Export Button And Alert Present On Reference List Page
