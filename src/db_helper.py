@@ -1,12 +1,8 @@
 import os
-import random
-import string
 import sys
-
 from sqlalchemy import text
 
 from config import app, db
-from repositories.citation_repository import create_ref
 
 
 def reset_db():
