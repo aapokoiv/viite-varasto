@@ -38,8 +38,6 @@ def ref_list():
     }
 
     data = get_citations(page, per_page, filters)
-    print(data["page"])
-    print(data["pages"])
 
     return render_template(
         "ref_list.html",

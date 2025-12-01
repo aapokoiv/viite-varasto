@@ -12,16 +12,28 @@ See all the citations
 <div class="filter-container">
     <span>Filter references:</span>
     <form action="/view_refs" method="get" autocomplete="off">
-        Search:
-        <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for refrerences..." maxlength="300">
-        Type:
-        <select id="type" name="type">
-            {% for type in available_filters["types"] %}
-                <option value="{{ type }}" {% if active_filters.type == type %}selected{% endif %}>
-                    {{ type|capitalize }}
-                </option>
-            {% endfor %}
-        </select>
+        <div>
+            Search:
+            <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for refrerences..." maxlength="300">
+        </div>
+        <div>
+            Type:
+            <select id="type" name="type">
+                {% for type in available_filters["types"] %}
+                    <option value="{{ type }}" {% if active_filters.type == type %}selected{% endif %}>
+                        {{ type|capitalize }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="year-slider-container">
+            <div class="year-slider-track"></div>
+            <div class="year-slider-selection" id="year-color"></div>
+            <input type="range" class="year-slider" id="year-min" min="0" max="2025" value="0">
+            <input type="range" class="year-slider" id="year-max" min="0" max="2025" value="2025">
+            <input type="number" class="year-slider-field" id="year-from">
+            <input type="number" class="year-slider-field" id="year-to">
+        </div>
         <button type="submit">Filter</button>
     </form>
 </div>
@@ -153,6 +165,7 @@ See all the citations
     </div>
 </div>
 
+<script src="{{ url_for('static', filename='js/filter.js') }}" defer></script>
 <script src="{{ url_for('static', filename='js/ref_list.js') }}" defer></script>
 
 {% endblock %}
