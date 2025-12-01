@@ -9,3 +9,4 @@ report.html
 possu.sh
 .coverage
 htmlcov/
+.vscode
