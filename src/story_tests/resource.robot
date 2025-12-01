@@ -1,5 +1,6 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  ../repositories/citation_repository.py
 
 *** Variables ***
 ${SERVER}     localhost:5001
@@ -22,7 +23,7 @@ Open And Configure Browser
         Call Method  ${options}  add_argument  --private-window
     END
     IF  $HEADLESS == 'true'
-        Set Selenium Speed  0.2 seconds
+        Set Selenium Speed  0.05 seconds
         Call Method  ${options}  add_argument  --headless
     ELSE
         Set Selenium Speed  ${DELAY}
@@ -76,6 +77,10 @@ Create Reference
     Open New Reference Page
     Fill Reference Form  ${type}  ${keyword}   ${author}  ${title}  ${year}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
     Submit Reference
+
+Create This Many References Quickly
+    [Arguments]  ${amount}
+    Create Test Refs Quickly  ${amount}
 
 Filter References By Selection
     [Arguments]  ${filter}  ${value}

@@ -1,6 +1,9 @@
-from sqlalchemy import text
+import sys
+import os
 
-from config import db
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from sqlalchemy import text
+from config import db, app
 from entities.citation import Citation
 
 def get_all_citations():
@@ -96,6 +99,21 @@ def create_ref(ref_type, keyword, author, title, year, journal=None, volume=None
 
     db.session.execute(sql, params)
     db.session.commit()
+
+def create_test_refs_quickly(amount: int):
+    with app.app_context():
+        for i in range(1, amount + 1):
+            sql = text(
+                """INSERT INTO citations (type, keyword, author, title, year)
+                   VALUES (:type, :keyword, :author, :title, :year)"""
+            )
+            db.session.execute(sql, {
+                'type': 'article',
+                'keyword': f'kw{i}',
+                'author': f'Author {i}',
+                'title': f'Ref {i}',
+                'year': '2000'})
+        db.session.commit()
 
 def update_ref(ref_id, ref_type, keyword, author, title, year, journal=None, volume=None, pages=None, publisher=None, booktitle=None):
     params = {

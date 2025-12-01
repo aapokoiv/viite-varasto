@@ -15,7 +15,7 @@ Page Lists Reference With No Parameters
     Page Should Contain  Toinen kirja
 
 Paging Moves Eleventh Reference to Second Page When Showing 10
-    Create This Many References  11
+    Create This Many References Quickly  11
     Open Reference List Page
     Page Should Contain  Ref 1
     Page Should Contain  Ref 10
@@ -25,7 +25,7 @@ Paging Moves Eleventh Reference to Second Page When Showing 10
     Page Should Not Contain  Ref 2
 
 Paging Moves Twentysixth Reference When Showing 25
-    Create This Many References  26
+    Create This Many References Quickly  26
     Open Reference List Page
     Show References  25
     Page Should Contain  Ref 1
@@ -36,7 +36,7 @@ Paging Moves Twentysixth Reference When Showing 25
     Page Should Not Contain  Ref 25
 
 Paging Moves Fiftyfirst Reference When Showing 50
-    Create This Many References  51
+    Create This Many References Quickly  51
     Open Reference List Page
     Show References  50
     Page Should Contain  Ref 1
@@ -47,7 +47,7 @@ Paging Moves Fiftyfirst Reference When Showing 50
     Page Should Not Contain  Ref 50
 
 Paging Shows First And Last Pages When In Specific Range
-    Create This Many References  70
+    Create This Many References Quickly  70
     Open Reference List Page
     Show References  10
     Page Should Contain  Next
@@ -61,7 +61,7 @@ Paging Shows First And Last Pages When In Specific Range
     Page Should Contain Element  first-page
 
 Paging Shows Two Pages Forward And Back From Currently Selected
-    Create This Many References  50
+    Create This Many References Quickly  50
     Go To  ${REF_LIST_URL}?page=3&ref_amount=10
     Page Should Contain Element  page-1
     Page Should Contain Element  page-2
@@ -75,12 +75,3 @@ Show References
     Wait Until Page Contains Element  class=refs-table  60 seconds
     Wait Until Element Is Visible  id=ref_amount  60 seconds
     Select From List By Value  id=ref_amount  ${amount}
-
-Create This Many References
-    Set Selenium Speed  ${DELAY_FAST}
-    [Arguments]  ${amount}
-    FOR  ${i}  IN RANGE  1  ${amount}+1
-        ${title}=  Evaluate  f"Ref {${i}}"
-        Create Reference  article  kw${i}  Author ${i}  ${title}  2000
-    END
-    Set Selenium Speed  ${DELAY}
