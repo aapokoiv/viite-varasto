@@ -34,6 +34,7 @@ SECRET_KEY=satunnainen_merkkijono
   ```bash
   pytest
   robot --variable HEADLESS:true src/story_tests
+  pylint --rcfile=src/.pylintrc src
   ```
 
 **Tietokannan alustaminen**
