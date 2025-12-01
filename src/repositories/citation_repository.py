@@ -31,7 +31,7 @@ def get_citation_by_id(ref_id):
                     result[10]) if result else None
 
 def get_citations(page: int=1, per_page: int=10, filters = None):
-    filters = {"query":"","type":""} if filters is None else filters
+    filters = {"query":"","type":"","year_from":0,"year_to":2025} if filters is None else filters
 
     offset = (page - 1) * per_page
     sql = "SELECT id, keyword, type, author, title, year FROM citations WHERE 1=1"
@@ -44,17 +44,24 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
         sql += " AND type = :type"
         count_sql += " AND type = :type"
 
+    sql += " AND year BETWEEN :year_from AND :year_to"
+    count_sql += " AND year BETWEEN :year_from AND :year_to"
+
     sql += " ORDER BY id LIMIT :limit OFFSET :offset"
 
     result = db.session.execute(text(sql), {
         "limit": per_page,
         "offset": offset,
         "query": f"%{filters["query"]}%",
-        "type": filters["type"]
+        "type": filters["type"],
+        "year_from": filters["year_from"],
+        "year_to": filters["year_to"],
         })
     count_result = db.session.execute(text(count_sql), {
         "query": f"%{filters["query"]}%",
-        "type": filters["type"]
+        "type": filters["type"],
+        "year_from": filters["year_from"],
+        "year_to": filters["year_to"],
         })
 
     infos = result.fetchall()

@@ -111,14 +111,20 @@ button, input[type="submit"] {
 }
 .year-slider::-webkit-slider-thumb { pointer-events: all; }
 
-.year-slider-track, .year-slider-selection {
+.year-slider-track {
 	height: 2px;
 	width: 95%;
 	transform: translate(4px, 9px);
 	background: #ddd;
 	position: absolute;
 }
-.year-slider-selection { background: #1192d8; }
+.year-slider-selection {
+	height: 2px;
+	width: 95%;
+	transform: translate(2px, 9px);
+	background: #1192d8;
+	position: absolute;
+}
 .year-slider-field { position: absolute; top: 30px; }
 
 #year-from {width: 50px; left: 2px;}

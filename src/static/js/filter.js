@@ -17,7 +17,7 @@ function updateValues() {
   const minPercent = (yearMin.value / yearMin.max) * 100
   const maxPercent = (yearMax.value / yearMax.max) * 100
   selected.style.left = minPercent + "%"
-  selected.style.width = (maxPercent - minPercent - 6) + "%"
+  selected.style.width = (maxPercent - minPercent) + "%"
 }
 
 yearMin.addEventListener('input', updateValues);

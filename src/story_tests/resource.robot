@@ -92,6 +92,12 @@ Filter References By Search
     Input Text  query  ${value}
     Click Button  Filter
 
+Filter References by Year
+    [Arguments]  ${minYearID}  ${minYear}  ${maxYearID}  ${maxYear}
+    Input Text  id:${minYearID}  ${minYear}
+    Input Text  id:${maxYearID}  ${maxYear}
+    Click Button  Filter
+
 No Error Messages
     Page Should Not Contain  Author and title must be at least 5 characters long
     Page Should Not Contain  Author and title must be at most 300 characters long

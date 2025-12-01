@@ -29,10 +29,10 @@ See all the citations
         <div class="year-slider-container">
             <div class="year-slider-track"></div>
             <div class="year-slider-selection" id="year-color"></div>
-            <input type="range" class="year-slider" id="year-min" min="0" max="2025" value="0">
-            <input type="range" class="year-slider" id="year-max" min="0" max="2025" value="2025">
-            <input type="number" class="year-slider-field" id="year-from">
-            <input type="number" class="year-slider-field" id="year-to">
+              <input type="range" class="year-slider" id="year-min" min="0" max="2025" value="{{ active_filters['year_from'] }}">
+              <input type="range" class="year-slider" id="year-max" min="0" max="2025" value="{{ active_filters['year_to'] }}">
+              <input type="number" class="year-slider-field" id="year-from" name="year_from" value="{{ active_filters['year_from'] }}">
+              <input type="number" class="year-slider-field" id="year-to" name="year_to" value="{{ active_filters['year_to'] }}">
         </div>
         <button type="submit">Filter</button>
     </form>
@@ -96,9 +96,9 @@ See all the citations
 <!-- Page Navigation -->
 <div class="pagination">
     {% if page > 1 %}
-        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page-1, ref_amount=per_page) }}">« Previous</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=page-1, ref_amount=per_page) }}">« Previous</a>
         {% if page > 3 and pages > 5 %}
-            <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=1, ref_amount=per_page) }}">1</a>
+            <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=1, ref_amount=per_page) }}">1</a>
             <span class="pagination-dots">...</span>
         {% endif %}
     {% else %}
@@ -109,16 +109,16 @@ See all the citations
         {% if i == page %}
             <a class="selected-page">{{ i }}</a>
         {% else %}
-            <a id="page-{{ i }}" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=i, ref_amount=per_page) }}">{{ i }}</a>
+            <a id="page-{{ i }}" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=i, ref_amount=per_page) }}">{{ i }}</a>
         {% endif %}
     {% endfor %}
 
     {% if page < pages %}
         {% if page < pages - 2 and pages > 5 %}
             <span class="pagination-dots">...</span>
-            <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
+            <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
         {% endif %}
-        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, page=page+1, ref_amount=per_page) }}">Next »</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=page+1, ref_amount=per_page) }}">Next »</a>
     {% else %}
         <a class="disabled">Next »</a>
     {% endif %}

@@ -34,7 +34,9 @@ def ref_list():
 
     filters = {
         "query": request.args.get("query", ""),
-        "type": request.args.get("type")
+        "type": request.args.get("type"),
+        "year_from": request.args.get("year_from", 0, type=int),
+        "year_to": request.args.get("year_to", 2025, type=int)
     }
 
     data = get_citations(page, per_page, filters)
@@ -49,7 +51,9 @@ def ref_list():
         per_page=per_page,
         active_filters={
             "query": filters["query"],
-            "type": filters["type"]
+            "type": filters["type"],
+            "year_from": filters["year_from"],
+            "year_to": filters["year_to"]
         }
     )
 
