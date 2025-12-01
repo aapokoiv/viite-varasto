@@ -1,3 +1,10 @@
+# Acceptance criteria:
+# User can export all references as a BibTex file.
+# User can initiate the export via a button.
+# The exported BibTex file contains all the information from the db
+# The downloaded file is correctly formatted
+# After exporting, a confirmation message is shown to the user.
+
 *** Settings ***
 Resource  resource.robot
 Library  RequestsLibrary
