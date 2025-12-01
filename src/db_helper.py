@@ -54,26 +54,9 @@ def setup_db():
     db.session.commit()
 
 
-def create_test_data(amount: int = 50):
-    types = ["article", "book", "inproceedings", "misc"]
-
-    print("Creating randomized test data.")
-    for _ in range(amount):
-        create_ref(
-            random.choice(types),
-            "".join(random.choices(string.ascii_letters, k=10)),
-            "".join(random.choices(string.ascii_letters, k=15)),
-            "".join(random.choices(string.ascii_letters, k=20)),
-            random.randrange(1900, 2025),
-        )
-    print("Data creation complete.")
-
-
 if __name__ == "__main__":
     with app.app_context():
-        if len(sys.argv) > 1 and sys.argv[1] == "testdata":
-            create_test_data()
-        elif len(sys.argv) > 1 and sys.argv[1] == "setup":
+        if len(sys.argv) > 1 and sys.argv[1] == "setup":
             setup_db()
         elif len(sys.argv) > 1 and sys.argv[1] == "reset":
             reset_db()
@@ -82,5 +65,4 @@ if __name__ == "__main__":
                 "Use one of the following arguments: \n"
                 "   setup - Sets up the database \n"
                 "   reset - Resets the database \n"
-                "   testdata - Creates randomized data to the database \n"
             )
