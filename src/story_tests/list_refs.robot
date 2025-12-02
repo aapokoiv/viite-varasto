@@ -1,3 +1,7 @@
+# User can see 10  references per page on the viewing page
+# User can see 20 references per page on the viewing page
+# User can see 50 references per page on the viewing page
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser

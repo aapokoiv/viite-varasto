@@ -1,3 +1,6 @@
+# User can filter the reference list by Year through a range input
+# Multiple filters can be applied at the same time.
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser

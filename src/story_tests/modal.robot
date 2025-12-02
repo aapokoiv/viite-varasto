@@ -1,3 +1,6 @@
+# User can press a button 
+# User sees more info from the reference
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
