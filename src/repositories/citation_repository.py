@@ -72,7 +72,19 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
     total = count_result.scalar()
 
     return {
-        "items": [Citation(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9], info[10], info[11], info[12]) for info in infos],
+        "items": [Citation(info[0],
+                           info[1],
+                           info[2],
+                           info[3],
+                           info[4],
+                           info[5],
+                           info[6],
+                           info[7],
+                           info[8],
+                           info[9],
+                           info[10],
+                           info[11],
+                           info[12]) for info in infos],
         "total": total,
         "page": page,
         "per_page": per_page,
