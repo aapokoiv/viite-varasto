@@ -48,7 +48,7 @@ Open Reference List Page
     Wait Until Page Contains Element  class=refs-table  30 seconds
 
 Fill Reference Form
-    [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
+    [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${doi}=None  ${category}=None  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
     Go To    ${NEW_REF_URL}
     Select From List By Value    id=ref_type    ${type}
     Input Text  name=ref_keyword  ${keyword}
@@ -56,6 +56,8 @@ Fill Reference Form
     Input Text  name=ref_title  ${title}
     Input Text  name=ref_year  ${year}
 
+    Input Text If Visible  name=ref_doi  ${doi}
+    Input Text If Visible  name=ref_category  ${category}
     Input Text If Visible  name=ref_journal  ${journal}
     Input Text If Visible  name=ref_volume  ${volume}
     Input Text If Visible  name=ref_pages  ${pages}
@@ -73,9 +75,9 @@ Submit Reference
     Click Button  name=ref_submit
 
 Create Reference
-    [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
+    [Arguments]  ${type}  ${keyword}  ${author}  ${title}  ${year}  ${doi}=None  ${category}=None  ${journal}=None  ${volume}=None  ${pages}=None  ${publisher}=None  ${booktitle}=None
     Open New Reference Page
-    Fill Reference Form  ${type}  ${keyword}   ${author}  ${title}  ${year}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
+    Fill Reference Form  ${type}  ${keyword}   ${author}  ${title}  ${year}  ${doi}  ${category}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
     Submit Reference
 
 Create This Many References Quickly

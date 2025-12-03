@@ -11,11 +11,11 @@ Create Article Reference Successfully With No Optional Fields
     No Error Messages
 
 Create Article Reference Successfully With All Optional Fields
-    Create Reference  article  art-kw  Miquel  Artikkelin testaus  2020  Journal  10  32-36
+    Create Reference  article  art-kw  Miquel  Artikkelin testaus  2020  doi=10.1000/xyz  category=ArticleCat  journal=Journal  volume=10  pages=32-36
     No Error Messages
 
 Create Article Reference Successfully With Some Optional Fields
-    Create Reference  article  art-kw  Miquel  Artikkelin testaus  2020  volume=10
+    Create Reference  article  art-kw  Miquel  Artikkelin testaus  2020  category=PartialCat  volume=10
     No Error Messages
 
 Create Article With Non-integer Volume
@@ -27,7 +27,7 @@ Create Book Reference Successfully With No Optional Field
     No Error Messages
 
 Create Book Reference Successfully With Optional Field
-    Create Reference  book  art-kw  Matti Meikäläinen  Kirjan testaus  2018  publisher=publisher
+    Create Reference  book  art-kw  Matti Meikäläinen  Kirjan testaus  2018  doi=10.2000/book  category=BookCat  publisher=publisher
     No Error Messages
 
 Create Inproceedings Reference Successfully With No Optional Field
@@ -35,7 +35,7 @@ Create Inproceedings Reference Successfully With No Optional Field
     No Error Messages
 
 Create Inproceedings Reference Successfully With Optional Field
-    Create Reference  inproceedings  art-kw  Maija Mehiläinen  Konferenssijulkaisun testaus  2019  booktitle=booktitle
+    Create Reference  inproceedings  art-kw  Maija Mehiläinen  Konferenssijulkaisun testaus  2019  doi=10.3000/conf  category=ConfCat  booktitle=booktitle
     No Error Messages
 
 Create Misc Reference Successfully

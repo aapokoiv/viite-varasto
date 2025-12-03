@@ -9,7 +9,9 @@ def citation_to_bibtex(citation):
         "volume": citation.volume,
         "pages": citation.pages,
         "publisher": citation.publisher,
-        "booktitle": citation.booktitle 
+        "booktitle": citation.booktitle,
+        "doi": citation.doi,
+        "category": citation.category
     }
 
     lines = [f"@{citation.type}" + "{" + f"{citation.keyword},"]
