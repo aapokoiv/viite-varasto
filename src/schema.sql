@@ -5,6 +5,8 @@ CREATE TABLE citations (
   author TEXT DEFAULT NULL,
   title TEXT DEFAULT NULL,
   year INT DEFAULT NULL,
+  doi TEXT DEFAULT NULL,
+  category TEXT DEFAULT NULL,
   booktitle TEXT DEFAULT NULL,
   journal TEXT DEFAULT NULL,
   volume INT DEFAULT NULL,
