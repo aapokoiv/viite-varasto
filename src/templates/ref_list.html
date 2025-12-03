@@ -49,6 +49,7 @@ See all the citations
     <tr>
         <th>ID</th>
         <th>Keyword</th>
+        <th>Category</th>
         <th>Type</th>
         <th>Author</th>
         <th>Title</th>
@@ -61,6 +62,7 @@ See all the citations
     <tr>
         <td>{{ ref.id }}</td>
         <td>{{ ref.keyword }}</td>
+        <td>{{ ref.category or 'None'}}</td>
         <td>{{ ref.type }}</td>
         <td>{{ ref.author }}</td>
         <td>{{ ref.title }}</td>
@@ -76,10 +78,12 @@ See all the citations
                 <button type="button" class="info-btn"
                         data-id="{{ ref.id }}"
                         data-keyword="{{ ref.keyword|e }}"
+                        data-category="{{ ref.category or ''|e }}"
                         data-type="{{ ref.type|e }}"
                         data-author="{{ ref.author|e }}"
                         data-title="{{ ref.title|e }}"
                         data-year="{{ ref.year }}"
+                        data-doi="{{ ref.doi or ''|e }}"
                         data-journal="{{ ref.journal or ''|e }}"
                         data-volume="{{ ref.volume or ''|e }}"
                         data-pages="{{ ref.pages or ''|e }}"
@@ -152,10 +156,12 @@ See all the citations
         <dl class="modal-details">
             <dt>ID</dt><dd id="m-id"></dd>
             <dt>Keyword</dt><dd id="m-keyword"></dd>
+            <dt>Category</dt><dd id="m-category"></dd>
             <dt>Type</dt><dd id="m-type"></dd>
             <dt>Author</dt><dd id="m-author"></dd>
             <dt>Title</dt><dd id="m-title"></dd>
             <dt>Year</dt><dd id="m-year"></dd>
+            <dt>Doi</dt><dd id="m-doi"></dd>
             <dt>Journal</dt><dd id="m-journal"></dd>
             <dt>Volume</dt><dd id="m-volume"></dd>
             <dt>Pages</dt><dd id="m-pages"></dd>
