@@ -1,5 +1,5 @@
 class Citation:
-    def __init__(self, id, keyword, type, author, title, year, doi, category, booktitle=None, journal=None, volume=None, pages=None, publisher=None):  # pylint: disable=redefined-builtin
+    def __init__(self, id, keyword, type, author, title, year, doi=None, category=None, booktitle=None, journal=None, volume=None, pages=None, publisher=None):  # pylint: disable=redefined-builtin
         self.id = id
         self.keyword = keyword
         self.type = type

@@ -70,11 +70,11 @@ def ref_list():
 def ref_creation():
     ref_type = request.form.get("ref_type")
     keyword = request.form.get("ref_keyword")
+    category = request.form.get("ref_category") or None
     author = request.form.get("ref_author")
     title = request.form.get("ref_title")
     year = request.form.get("ref_year")
     doi = request.form.get("ref_doi") or None
-    category = request.form.get("ref_category") or None
     journal = request.form.get("ref_journal") or None
     volume = request.form.get("ref_volume") or None
     pages = request.form.get("ref_pages") or None
@@ -114,11 +114,11 @@ def ref_edit(ref_id):
     if request.method == "POST":
         ref_type = request.form.get("ref_type")
         keyword = request.form.get("ref_keyword")
+        category = request.form.get("ref_category") or None
         author = request.form.get("ref_author")
         title = request.form.get("ref_title")
         year = request.form.get("ref_year")
         doi = request.form.get("ref_doi") or None
-        category = request.form.get("ref_category") or None
         journal = request.form.get("ref_journal") or None
         volume = request.form.get("ref_volume") or None
         pages = request.form.get("ref_pages") or None
