@@ -38,7 +38,7 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
     filters = {"query":"","type":"","year_from":0,"year_to":2025} if filters is None else filters
 
     offset = (page - 1) * per_page
-    sql = "SELECT id, keyword, type, author, title, year FROM citations WHERE 1=1"
+    sql = "SELECT id, keyword, type, author, title, year, doi, category, booktitle, journal, volume, pages, publisher FROM citations WHERE 1=1"
     count_sql = "SELECT COUNT(*) FROM citations WHERE 1=1"
 
     if filters["query"]:
@@ -72,7 +72,7 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
     total = count_result.scalar()
 
     return {
-        "items": [Citation(info[0], info[1], info[2], info[3], info[4], info[5]) for info in infos],
+        "items": [Citation(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9], info[10], info[11], info[12]) for info in infos],
         "total": total,
         "page": page,
         "per_page": per_page,

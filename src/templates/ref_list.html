@@ -62,7 +62,7 @@ See all the citations
     <tr>
         <td>{{ ref.id }}</td>
         <td>{{ ref.keyword }}</td>
-        <td>{{ ref.category or 'None'}}</td>
+        <td>{{ ref.category or '-' }}</td>
         <td>{{ ref.type }}</td>
         <td>{{ ref.author }}</td>
         <td>{{ ref.title }}</td>
@@ -76,19 +76,19 @@ See all the citations
                     <input type="submit" value="Poista">
                 </form>
                 <button type="button" class="info-btn"
-                        data-id="{{ ref.id }}"
-                        data-keyword="{{ ref.keyword|e }}"
-                        data-category="{{ ref.category or ''|e }}"
-                        data-type="{{ ref.type|e }}"
-                        data-author="{{ ref.author|e }}"
-                        data-title="{{ ref.title|e }}"
-                        data-year="{{ ref.year }}"
-                        data-doi="{{ ref.doi or ''|e }}"
-                        data-journal="{{ ref.journal or ''|e }}"
-                        data-volume="{{ ref.volume or ''|e }}"
-                        data-pages="{{ ref.pages or ''|e }}"
-                        data-publisher="{{ ref.publisher or ''|e }}"
-                        data-booktitle="{{ ref.booktitle or ''|e }}"
+                    data-id="{{ ref.id }}"
+                    data-keyword="{{ ref.keyword|e }}"
+                    data-category="{{ (ref.category or '')|e }}"
+                    data-type="{{ ref.type|e }}"
+                    data-author="{{ ref.author|e }}"
+                    data-title="{{ ref.title|e }}"
+                    data-year="{{ ref.year }}"
+                    data-doi="{{ (ref.doi or '')|e }}"
+                    data-journal="{{ (ref.journal or '')|e }}"
+                    data-volume="{{ (ref.volume or '')|e }}"
+                    data-pages="{{ (ref.pages or '')|e }}"
+                    data-publisher="{{ (ref.publisher or '')|e }}"
+                    data-booktitle="{{ (ref.booktitle or '')|e }}"
                 >?</button>
 
             </div>
