@@ -14,7 +14,7 @@ See all the citations
     <form action="/view_refs" method="get" autocomplete="off">
         <div>
             Search:
-            <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for refrerences..." maxlength="300">
+            <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for references..." maxlength="300">
         </div>
         <div>
             Type:
@@ -26,13 +26,11 @@ See all the citations
                 {% endfor %}
             </select>
         </div>
-        <div class="year-slider-container">
-            <div class="year-slider-track"></div>
-            <div class="year-slider-selection" id="year-color"></div>
-              <input type="range" class="year-slider" id="year-min" min="0" max="2025" value="{{ active_filters['year_from'] }}">
-              <input type="range" class="year-slider" id="year-max" min="0" max="2025" value="{{ active_filters['year_to'] }}">
-              <input type="number" class="year-slider-field" id="year-from" name="year_from" value="{{ active_filters['year_from'] }}">
-              <input type="number" class="year-slider-field" id="year-to" name="year_to" value="{{ active_filters['year_to'] }}">
+        <div class="year-filter-container">
+            <span class="column-center">Year:</span>
+            <input type="text" class="year-filter-field" id="year-from" name="year_from" placeholder="From..." value="{{ active_filters['year_from'] }}">
+            <span class="column-center horizontal-margin-5">-</span>
+            <input type="text" class="year-filter-field" id="year-to" name="year_to" placeholder="To..." value="{{ active_filters['year_to'] }}">
         </div>
         <button type="submit">Filter</button>
     </form>
