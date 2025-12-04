@@ -1,6 +1,12 @@
 class UserInputError(Exception):
     pass
 
+class InvalidURLError(Exception):
+    pass
+
+def validate_url(url):
+    pass
+
 def validate_ref(ref_type, keyword, author, title, year):
     if not ref_type:
         raise UserInputError("Reference type is required")
