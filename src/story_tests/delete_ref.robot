@@ -6,21 +6,21 @@ Test Setup  Reset Refs
 
 *** Test Cases ***
 Delete Reference Successfully
-    Create Reference  article  del-kw  del-author  del-title  2000  journal=journal  volume=1  pages=10-20
+    Create Reference  article  del-kw  del-author  del-title  2000  doi=10.4000/del  category=DelCat  journal=journal  volume=1  pages=10-20
     Open Reference List Page
     Click Delete Button  del-title
     Page Should Contain  No references found yet
 
 Delete Right Reference Successfully
-    Create Reference  article  keep-kw  keep-author  keep-title  2000  journal=journal  volume=1  pages=10-20
-    Create Reference  book  delete-kw  delete-author  delete-title  2010  publisher=publisher  volume=2  pages=30-40
+    Create Reference  article  keep-kw  keep-author  keep-title  2000  doi=10.4000/keep  category=KeepCat  journal=journal  volume=1  pages=10-20
+    Create Reference  book  delete-kw  delete-author  delete-title  2010  doi=10.4000/delete  category=DeleteCat  publisher=publisher  volume=2  pages=30-40
     Open Reference List Page
     Click Delete Button  delete-title
     Page Should Not Contain  delete-title
     Page Should Contain  keep-title
 
 Delete Reference Notification Is Displayed On Screen
-    Create Reference  book  delete-kw  delete-author  delete-title  2010  publisher=publisher  volume=2  pages=30-40
+    Create Reference  book  delete-kw  delete-author  delete-title  2010  doi=10.4000/delete  category=DeleteCat  publisher=publisher  volume=2  pages=30-40
     Open Reference List Page
     Click Delete Button  delete-title
     Page Should Contain  Reference succesfully deleted.

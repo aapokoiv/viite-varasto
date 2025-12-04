@@ -24,7 +24,7 @@ disable=raw-checker-failed,
 
 [FORMAT]
 
-max-line-length = 150
+max-line-length = 160
 indent-after-paren = 4
 
 [BASIC]
@@ -35,6 +35,7 @@ max-args=14
 max-attributes=14
 min-public-methods=0
 max-positional-arguments=15
+max-locals = 17
 
 [REFACTORING]
 

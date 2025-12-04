@@ -1,3 +1,34 @@
+Sprintti 3
+## Glad:
+katselmus hyvin
+robot testit korjattu (pliis)
+
+## Sad:
+Robot testit, ei ehditty kategorian lisäystä sen takia
+
+## Mad:
+Robot testit... Pieniä henkilökohtaisia ongelmia, vaikutti tuottavuuteen
+
+## Start:
+Demoihin valmistelu
+
+## Stop:
+none
+
+## Continue:
+Töitä, kommunikaatio
+
+## More of:
+none
+
+## Less of:
+Robot testien kanssa taistelua
+
+
+# Parannetaan:
+Enemmän koodasta, vähemmän robot-säätöä
+
+
 Sprintti 2
 ## Glad:
 Kaikki* toimi

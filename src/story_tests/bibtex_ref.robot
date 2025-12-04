@@ -20,13 +20,13 @@ Export Button Hidden When No references
     Page Should Not Contain Button  Lataa BibTeX
 
 Export Button And Alert Present On Reference List Page
-    Create Reference  article  bibtex-kw  BibTeX Author  BibTeX  2021  journal=Journal  volume=5  pages=100-110
+    Create Reference  article  bibtex-kw  BibTeX Author  BibTeX  2021  doi=10.1234/abc  category=BibCategory  journal=Journal  volume=5  pages=100-110
     Open Reference List Page
     Click Button  Lataa BibTeX
     Alert Should Be Present
 
 Create BibTeX Reference Successfully
-    Create Reference  article  bibtex-kw  BibTeX Author  BibTeX  2021  journal=Journal  volume=5  pages=100-110
+    Create Reference  article  bibtex-kw  BibTeX Author  BibTeX  2021  doi=10.1234/abc  category=BibCategory  journal=Journal  volume=5  pages=100-110
     Open Reference List Page
     # tee HTTP-pyyntö suoraan palvelimelle (ei selaimen latausta)
     Create Session    api    ${HOME_URL}
@@ -40,3 +40,5 @@ Create BibTeX Reference Successfully
     Should Contain    ${resp.text}    journal = {Journal}
     Should Contain    ${resp.text}    volume = {5},
     Should Contain    ${resp.text}    pages = {100-110}
+    Should Contain    ${resp.text}    doi = {10.1234/abc}
+    Should Contain    ${resp.text}    category = {BibCategory}

@@ -1,3 +1,7 @@
+# User can see 10  references per page on the viewing page
+# User can see 20 references per page on the viewing page
+# User can see 50 references per page on the viewing page
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
@@ -8,8 +12,8 @@ Test Setup  Reset Refs
 *** Test Cases ***
 
 Page Lists Reference With No Parameters
-    Create Reference  article  kw1  Matti  Ensimmäinen artikkeli  2000
-    Create Reference  book  kw2  Jukka  Toinen kirja  2010
+    Create Reference  article  kw1  Matti  Ensimmäinen artikkeli  2000  doi=10.7000/lr1  category=ListArt
+    Create Reference  book  kw2  Jukka  Toinen kirja  2010  doi=10.7000/lr2  category=ListBook
     Open Reference List Page
     Page Should Contain  Ensimmäinen artikkeli
     Page Should Contain  Toinen kirja

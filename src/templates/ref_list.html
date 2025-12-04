@@ -14,7 +14,7 @@ See all the citations
     <form action="/view_refs" method="get" autocomplete="off">
         <div>
             Search:
-            <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for refrerences..." maxlength="300">
+            <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for references..." maxlength="300">
         </div>
         <div>
             Type:
@@ -26,13 +26,11 @@ See all the citations
                 {% endfor %}
             </select>
         </div>
-        <div class="year-slider-container">
-            <div class="year-slider-track"></div>
-            <div class="year-slider-selection" id="year-color"></div>
-              <input type="range" class="year-slider" id="year-min" min="0" max="2025" value="{{ active_filters['year_from'] }}">
-              <input type="range" class="year-slider" id="year-max" min="0" max="2025" value="{{ active_filters['year_to'] }}">
-              <input type="number" class="year-slider-field" id="year-from" name="year_from" value="{{ active_filters['year_from'] }}">
-              <input type="number" class="year-slider-field" id="year-to" name="year_to" value="{{ active_filters['year_to'] }}">
+        <div class="year-filter-container">
+            <span class="column-center">Year:</span>
+            <input type="text" class="year-filter-field" id="year-from" name="year_from" placeholder="From..." value="{{ active_filters['year_from'] }}">
+            <span class="column-center horizontal-margin-5">-</span>
+            <input type="text" class="year-filter-field" id="year-to" name="year_to" placeholder="To..." value="{{ active_filters['year_to'] }}">
         </div>
         <button type="submit">Filter</button>
     </form>
@@ -49,6 +47,7 @@ See all the citations
     <tr>
         <th>ID</th>
         <th>Keyword</th>
+        <th>Category</th>
         <th>Type</th>
         <th>Author</th>
         <th>Title</th>
@@ -61,6 +60,7 @@ See all the citations
     <tr>
         <td>{{ ref.id }}</td>
         <td>{{ ref.keyword }}</td>
+        <td>{{ ref.category or '-' }}</td>
         <td>{{ ref.type }}</td>
         <td>{{ ref.author }}</td>
         <td>{{ ref.title }}</td>
@@ -74,17 +74,19 @@ See all the citations
                     <input type="submit" value="Poista">
                 </form>
                 <button type="button" class="info-btn"
-                        data-id="{{ ref.id }}"
-                        data-keyword="{{ ref.keyword|e }}"
-                        data-type="{{ ref.type|e }}"
-                        data-author="{{ ref.author|e }}"
-                        data-title="{{ ref.title|e }}"
-                        data-year="{{ ref.year }}"
-                        data-journal="{{ ref.journal or ''|e }}"
-                        data-volume="{{ ref.volume or ''|e }}"
-                        data-pages="{{ ref.pages or ''|e }}"
-                        data-publisher="{{ ref.publisher or ''|e }}"
-                        data-booktitle="{{ ref.booktitle or ''|e }}"
+                    data-id="{{ ref.id }}"
+                    data-keyword="{{ ref.keyword|e }}"
+                    data-category="{{ (ref.category or '')|e }}"
+                    data-type="{{ ref.type|e }}"
+                    data-author="{{ ref.author|e }}"
+                    data-title="{{ ref.title|e }}"
+                    data-year="{{ ref.year }}"
+                    data-doi="{{ (ref.doi or '')|e }}"
+                    data-journal="{{ (ref.journal or '')|e }}"
+                    data-volume="{{ (ref.volume or '')|e }}"
+                    data-pages="{{ (ref.pages or '')|e }}"
+                    data-publisher="{{ (ref.publisher or '')|e }}"
+                    data-booktitle="{{ (ref.booktitle or '')|e }}"
                 >?</button>
 
             </div>
@@ -152,10 +154,12 @@ See all the citations
         <dl class="modal-details">
             <dt>ID</dt><dd id="m-id"></dd>
             <dt>Keyword</dt><dd id="m-keyword"></dd>
+            <dt>Category</dt><dd id="m-category"></dd>
             <dt>Type</dt><dd id="m-type"></dd>
             <dt>Author</dt><dd id="m-author"></dd>
             <dt>Title</dt><dd id="m-title"></dd>
             <dt>Year</dt><dd id="m-year"></dd>
+            <dt>Doi</dt><dd id="m-doi"></dd>
             <dt>Journal</dt><dd id="m-journal"></dd>
             <dt>Volume</dt><dd id="m-volume"></dd>
             <dt>Pages</dt><dd id="m-pages"></dd>

@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function openModal(data) {
         showValue('m-id', data.id);
         showValue('m-keyword', data.keyword);
+        showValue('m-category', data.category);
         showValue('m-type', data.type);
         showValue('m-author', data.author);
         showValue('m-title', data.title);
         showValue('m-year', data.year);
+        showValue('m-doi', data.doi);
         showValue('m-journal', data.journal);
         showValue('m-volume', data.volume);
         showValue('m-pages', data.pages);

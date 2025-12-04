@@ -1,3 +1,6 @@
+# User can press a button 
+# User sees more info from the reference
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
@@ -8,7 +11,7 @@ Test Setup  Reset Refs
 *** Test Cases ***
 
 Modal Shows Citation Details
-    Create Reference  article  kw_modal  Alice  Modal Test  2022  J Test  1  10-20  Pub
+    Create Reference  article  kw_modal  Alice  Modal Test  2022  doi=10.5555/modal  category=ModalCat  journal=J Test  volume=1  pages=10-20  publisher=Pub
     Open Reference List Page
     Click Element  css:.info-btn
     Wait Until Element Is Visible  css:.modal-content  5 seconds
