@@ -26,6 +26,16 @@ See all the citations
                 {% endfor %}
             </select>
         </div>
+        <div>
+            Category:
+            <select id="category" name="category" required>
+                {% for category in available_filters["categories"] if category %}
+                    <option value="{{ category }}" {% if active_filters.type == category %}selected{% endif %}>
+                        {{ category|capitalize }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
         <div class="year-filter-container">
             <span class="column-center">Year:</span>
             <input type="text" class="year-filter-field" id="year-from" name="year_from" placeholder="From..." value="{{ active_filters['year_from'] }}">
