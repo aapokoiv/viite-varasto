@@ -35,7 +35,7 @@ def get_citation_by_id(ref_id):
                     result[12]) if result else None
 
 def get_citations(page: int=1, per_page: int=10, filters = None):
-    filters = {"query":"","type":"","year_from":0,"year_to":2025} if filters is None else filters
+    filters = {"query":"","type":"","year_from":0,"year_to":2025, "category":""} if filters is None else filters
 
     offset = (page - 1) * per_page
     sql = "SELECT id, keyword, type, author, title, year, doi, category, booktitle, journal, volume, pages, publisher FROM citations WHERE 1=1"
