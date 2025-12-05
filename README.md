@@ -32,8 +32,8 @@ SECRET_KEY=satunnainen_merkkijono
 - Aja testit läpi seuraavilla komennoilla:
 
   ```bash
-  pytest
   robot --variable HEADLESS:true src/story_tests
+  pytest
   pylint --rcfile=src/.pylintrc src
   ```
 

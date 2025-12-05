@@ -5,7 +5,7 @@ class InvalidURLError(Exception):
     pass
 
 def validate_url(url):
-    pass
+    return url
 
 def validate_ref(ref_type, keyword, author, title, year):
     if not ref_type:
