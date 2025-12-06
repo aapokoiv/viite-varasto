@@ -28,10 +28,10 @@ def extract_year(base, is_book=False):
     if is_book:
         date = base.find('h2', {'class': 'left-bordered-title'}).find('span', {'class': 'date'})
         split_date = date.text.split(" ")
-        return split_date[1]
+        return int(split_date[1])
     date = base.find('span', {'class': 'core-date-published'})
     split_date = date.text.split(" ")
-    return split_date[2]
+    return int(split_date[2])
 
 def extract_authors(base, is_book=False):
     authors = []
