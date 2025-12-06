@@ -103,25 +103,25 @@ def extract_base_info(url, info):
     }
 
 def dismiss_cookies(driver):
-    cookie_button = WebDriverWait(driver, 10).until(
+    cookie_button = WebDriverWait(driver, 60).until(
         EC.element_to_be_clickable((By.ID, "CybotCookiebotDialogBodyButtonDecline"))
     )
     cookie_button.click()
 
 def expand_book_authors(driver):
     if driver.find_element(By.CLASS_NAME, 'count-list'):
-        expand_authors_button = WebDriverWait(driver, 10).until(
+        expand_authors_button = WebDriverWait(driver, 60).until(
             EC.element_to_be_clickable((By.CLASS_NAME, "count-list"))
         )
         expand_authors_button.click()
 
 def retrieve_info_container(soup, driver, is_book):
     if is_book:
-        WebDriverWait(driver, 10).until( EC.presence_of_element_located((By.CLASS_NAME, 'container')) )
+        WebDriverWait(driver, 60).until( EC.presence_of_element_located((By.CLASS_NAME, 'container')) )
         dismiss_cookies(driver)
         expand_book_authors(driver)
         return soup.find('div', {'class': 'colored-block'})
-    WebDriverWait(driver, 10).until( EC.presence_of_element_located((By.CLASS_NAME, 'core-container')) )
+    WebDriverWait(driver, 60).until( EC.presence_of_element_located((By.CLASS_NAME, 'core-container')) )
     return soup.find('div', {'class': 'core-container'})
 
 def scrape_acm(url: str):
