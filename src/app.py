@@ -12,7 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from config import app, test_env
 from db_helper import reset_db
-from repositories.bibtex_repository import all_citations_to_bibtex
+from repositories.bibtex_repository import all_citations_to_bibtex, citation_to_bibtex
 from repositories.citation_repository import (
     create_ref,
     delete_ref,
@@ -20,6 +20,7 @@ from repositories.citation_repository import (
     get_citations,
     get_filters,
     update_ref,
+    get_all_citations,
 )
 from util import UserInputError, get_page_range, validate_article_fields, validate_ref
 
@@ -166,6 +167,43 @@ def export_bibtex():
         mimetype="text/plain; charset=utf-8",
         headers={"Content-Disposition": "attachment;filename=citations.bib"}
     )
+
+@app.route("/select_refs", methods=["GET"])
+def select_refs():
+    references = get_all_citations()
+    categories = list(set(ref.category for ref in references if ref.category))
+
+    selected_category = request.args.get("category", "").strip()
+    if selected_category:
+        references = [ref for ref in references if ref.category == selected_category]
+
+    select_all = request.args.get("select_all") == "1"
+    return render_template(
+        "select_refs.html",
+        references=references,
+        categories=categories,
+        selected_category=selected_category,
+        select_all=select_all
+        )
+
+@app.route("/export_selected_bibtex", methods=["POST"])
+def export_bibtex_selected():
+    selected_ids = request.form.getlist("selected_refs")
+    category = request.form.get("category", "")
+    if not selected_ids:
+        flash("No references selected for export.", "success")
+        return redirect(url_for('select_refs', category=category))
+
+    citations = [get_citation_by_id(int(ref_id)) for ref_id in selected_ids]
+    bibtex_data = "\n\n".join(citation_to_bibtex(citation) for citation in citations)
+    return Response(
+        bibtex_data,
+        mimetype="text/plain; charset=utf-8",
+        headers={"Content-Disposition": "attachment;filename=citations.bib"}
+    )
+
+
+
 
 # testausta varten oleva reitti
 if test_env:

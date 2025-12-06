@@ -41,4 +41,3 @@ Create BibTeX Reference Successfully
     Should Contain    ${resp.text}    volume = {5},
     Should Contain    ${resp.text}    pages = {100-110}
     Should Contain    ${resp.text}    doi = {10.1234/abc}
-    Should Contain    ${resp.text}    category = {BibCategory}

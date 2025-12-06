@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}Valitse viitteet BibTeX-tiedostoon{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Valitse viitteet BibTeX-tiedostoon</h2>
+
+    <!-- Takaisin viitelistaan -->
+    <div class="filter-container">
+        <form method="GET" action="{{ url_for('ref_list') }}">
+            <button type="submit">Takaisin viitelistaan</button>
+        </form>
+    </div>
+
+     <div class="filter-container" style="display: flex; gap: 10px; align-items: center;">
+        <form method="GET" action="{{ url_for('select_refs') }}">
+            <label for="category-filter">Suodata kategorialla:</label>
+            <select id="category-filter" name="category" onchange="this.form.submit()">
+                <option value="">-- Kaikki kategoriat --</option>
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if cat == selected_category %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <form method="GET" action="{{ url_for('select_refs') }}" style="display: inline;">
+            <input type="hidden" name="category" value="{{ selected_category or '' }}">
+            <input type="hidden" name="select_all" value="1">
+            <button type="submit">Valitse kaikki näkyvät</button>
+        </form>
+        <form method="POST" action="{{ url_for('export_bibtex_selected') }}" style="display: inline;" id="lataa-form">
+            {% if selected_category %}
+                <input type="hidden" name="category" value="{{ selected_category }}">
+            {% endif %}
+            <button type="submit">Lataa valitut BibTeX</button>
+        </form>
+    </div>
+
+    <!-- Viitteiden valinta (POST-lomake) -->
+    <form id="select-refs-form" method="POST" action="{{ url_for('export_bibtex_selected') }}">
+        {% if selected_category %}
+            <input type="hidden" name="category" value="{{ selected_category }}">
+        {% endif %}
+        
+        <table class="refs-table">
+            <thead>
+                <tr>
+                    <th>Valitse</th>
+                    <th>Keyword</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if references %}
+                    {% for ref in references %}
+                    <tr>
+                        <td><input type="checkbox" name="selected_refs" value="{{ ref.id }}" form="lataa-form" {% if select_all %}checked{% endif %}></td>
+                        <td>{{ ref.keyword }}</td>
+                        <td>{{ ref.title }}</td>
+                        <td>{{ ref.author }}</td>
+                        <td>{{ ref.year }}</td>
+                        <td>{{ ref.category or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" style="text-align: center;">Ei viitteitä tässä kategoriassa.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}

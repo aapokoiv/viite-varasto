@@ -10,6 +10,7 @@ ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
 ${NEW_REF_URL}  http://${SERVER}/new_ref
 ${REF_LIST_URL}  http://${SERVER}/view_refs
+${REF_SELECT_URL}  http://${SERVER}/select_refs
 ${BROWSER}    chrome
 ${HEADLESS}   false
 

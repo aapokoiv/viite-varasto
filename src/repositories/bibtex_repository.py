@@ -11,7 +11,6 @@ def citation_to_bibtex(citation):
         "publisher": citation.publisher,
         "booktitle": citation.booktitle,
         "doi": citation.doi,
-        "category": citation.category
     }
 
     lines = [f"@{citation.type}" + "{" + f"{citation.keyword},"]
