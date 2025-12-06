@@ -1,4 +1,5 @@
 # User can filter the reference list by Year through a range input
+# User can filter the reference list by category
 # Multiple filters can be applied at the same time.
 
 *** Settings ***
@@ -37,3 +38,15 @@ Page Lists References Filtered By Year
     Page Should Contain  1968
     Page Should Not Contain  2008
     Page Should Not Contain  2014
+
+Page Lists References Filtered By Category
+    Create Reference  article  kw1  Matti  Ensimmäinen artikkeli  2008  doi=10.6020/y1  category=YearArt
+    Create Reference  book  kw2  Jukka  Toinen kirja  2014  doi=10.6020/y2  category=YearBook
+    Create Reference  book  kw3  Jukka  Kolmas kirja  1972  doi=10.6020/y3  category=YearBook
+    Create Reference  book  kw4  Jukka  Neljäs kirja  1968  doi=10.6020/y4  category=YearBook
+    Open Reference List Page
+    Filter References By Category  YearBook
+    Page Should Contain  2014
+    Page Should Contain  1972
+    Page Should Contain  1968
+    Page Should Not Contain  2008

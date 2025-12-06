@@ -94,6 +94,11 @@ Filter References By Search
     Input Text  query  ${value}
     Click Button  Filter
 
+Filter References By Category
+    [Arguments]  ${category}
+    Select From List By Value  id=category  ${category}
+    Click Button  Filter
+
 Filter References by Year
     [Arguments]  ${minYearID}  ${minYear}  ${maxYearID}  ${maxYear}
     Input Text  id:${minYearID}  ${minYear}
