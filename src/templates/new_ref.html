@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Create a new todo
+Create a new reference
 {% endblock %}
 
 {% block body %}
@@ -16,6 +16,36 @@ Create a new todo
 </ul>
 {% endif %}
 {% endwith %}
+
+<!-- Import from ACM Section -->
+<h3>Import from ACM</h3>
+<form action="/create_ref" method="post" class="container" autocomplete="off">
+  <div class="form-grid">
+    <div class="form-row">
+      <label for="ref_acm_url">ACM URL:</label>
+      <input type="url" id="ref_acm_url" name="ref_acm_url" placeholder="https://dl.acm.org/..." class="big-text-input">
+    </div>
+
+    <div class="form-row">
+      <label for="ref_keyword_acm">Keyword:</label>
+      <input type="text" id="ref_keyword_acm" name="ref_keyword">
+    </div>
+
+    <div class="form-row">
+      <label for="ref_category_acm">Category:</label>
+      <input type="text" id="ref_category_acm" name="ref_category">
+    </div>
+  </div>
+  <br>
+  <div>
+    <button type="submit" name="ref_submit">Import from ACM</button>
+  </div>
+</form>
+
+<hr style="margin: 30px 0;">
+
+<!-- Add Reference Manually Section -->
+<h3>Add reference manually</h3>
 <form action="/new_ref" method="get" class="form-row">
   <label for="ref_type">Type:</label>
   <select id="ref_type" name="ref_type" required onchange="this.form.submit()">
