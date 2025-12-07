@@ -1,4 +1,5 @@
 import re
+import os
 from flask import flash, redirect
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
@@ -7,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
 from util import InvalidURLError, validate_url
 
@@ -109,11 +111,14 @@ def dismiss_cookies(driver):
     cookie_button.click()
 
 def expand_book_authors(driver):
-    if driver.find_element(By.CLASS_NAME, 'count-list'):
-        expand_authors_button = WebDriverWait(driver, 10).until(
+    try:
+        expand_authors_button = WebDriverWait(driver, 3).until(
             EC.element_to_be_clickable((By.CLASS_NAME, "count-list"))
         )
         expand_authors_button.click()
+    except (TimeoutException, NoSuchElementException):
+        # If the expand button is not present or not clickable, just continue
+        pass
 
 def retrieve_info_container(soup, driver, is_book):
     if is_book:
@@ -125,15 +130,29 @@ def retrieve_info_container(soup, driver, is_book):
     return soup.find('div', {'class': 'core-container'})
 
 def scrape_acm(url: str):
+    driver = None
     try:
         validate_url(url)
 
-        headers = 'Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.6998.166 Safari/537.36'
+        headers = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
         options = Options()
         options.add_argument('--headless=new')
         options.add_argument(f'user-agent={headers}')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
 
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        chromium_binary = '/usr/bin/chromium'
+        if os.path.exists(chromium_binary):
+            options.binary_location = chromium_binary
+
+        try:
+            driver = webdriver.Chrome(options=options)
+        except WebDriverException:
+            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
         driver.get(url)
 
         soup = bs(driver.page_source, 'lxml')
@@ -153,9 +172,10 @@ def scrape_acm(url: str):
             elif data['type'] == "inproceedings":
                 data['booktitle'] = extract_booktitle(info)
 
-        driver.quit()
         return data
-
     except InvalidURLError as e:
         flash(str(e), "error")
         return redirect("/new_ref")
+    finally:
+        if driver:
+            driver.quit()

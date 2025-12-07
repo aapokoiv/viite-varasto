@@ -22,6 +22,7 @@ from repositories.citation_repository import (
     update_ref,
     get_all_citations,
 )
+from scraper import scrape_acm
 from util import UserInputError, get_page_range, validate_article_fields, validate_ref
 
 
@@ -70,10 +71,11 @@ def ref_list():
 
 
 @app.route("/create_ref", methods=["POST"])
-def ref_creation():
+def ref_creation():  # pylint: disable=too-many-return-statements
     ref_type = request.form.get("ref_type")
-    keyword = request.form.get("ref_keyword")
-    category = request.form.get("ref_category") or None
+    acm_url = request.form.get("ref_acm_url") or None
+    keyword = request.form.get("ref_keyword") or request.form.get("ref_keyword_acm") or None
+    category = request.form.get("ref_category") or request.form.get("ref_category_acm") or None
     author = request.form.get("ref_author")
     title = request.form.get("ref_title")
     year = request.form.get("ref_year")
@@ -84,6 +86,35 @@ def ref_creation():
     publisher = request.form.get("ref_publisher") or None
     booktitle = request.form.get("ref_booktitle") or None
 
+    if acm_url:
+        if "dl.acm.org" not in acm_url:
+            flash("Invalid ACM URL. Please use a URL from dl.acm.org")
+            return redirect("/new_ref")
+
+        try:
+            data = scrape_acm(acm_url)
+            if not data:
+                flash("Failed to import from ACM. Please check the URL.")
+                return redirect("/new_ref")
+
+            ref_type = data.get('type', 'misc')
+            author = author or ', '.join(data.get('authors', []))
+            title = title or data.get('title', '')
+            year = year or str(data.get('year', ''))
+            doi = doi or data.get('doi') or None
+            journal = journal or data.get('journal') or None
+            volume = volume or data.get('volume') or None
+            pages = pages or data.get('pages') or None
+            publisher = publisher or data.get('publisher') or None
+            booktitle = booktitle or data.get('booktitle') or None
+
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            flash(f"Error importing from ACM: {str(e)}")
+            return redirect("/new_ref")
+
+    if not ref_type or not author or not title:
+        flash("Please fill in all required fields")
+        return redirect("/new_ref")
 
     try:
         if ref_type == "article":
