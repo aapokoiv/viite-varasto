@@ -74,8 +74,8 @@ def ref_list():
 def ref_creation():  # pylint: disable=too-many-return-statements
     ref_type = request.form.get("ref_type")
     acm_url = request.form.get("ref_acm_url") or None
-    keyword = request.form.get("ref_keyword")
-    category = request.form.get("ref_category") or None
+    keyword = request.form.get("ref_keyword") or request.form.get("ref_keyword_acm") or None
+    category = request.form.get("ref_category") or request.form.get("ref_category_acm") or None
     author = request.form.get("ref_author")
     title = request.form.get("ref_title")
     year = request.form.get("ref_year")
