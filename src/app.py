@@ -71,7 +71,7 @@ def ref_list():
 
 
 @app.route("/create_ref", methods=["POST"])
-def ref_creation():
+def ref_creation():  # pylint: disable=too-many-return-statements
     ref_type = request.form.get("ref_type")
     acm_url = request.form.get("ref_acm_url") or None
     keyword = request.form.get("ref_keyword")
@@ -90,13 +90,13 @@ def ref_creation():
         if "dl.acm.org" not in acm_url:
             flash("Invalid ACM URL. Please use a URL from dl.acm.org")
             return redirect("/new_ref")
-        
+
         try:
             data = scrape_acm(acm_url)
             if not data:
                 flash("Failed to import from ACM. Please check the URL.")
                 return redirect("/new_ref")
-            
+
             ref_type = data.get('type', 'misc')
             author = author or ', '.join(data.get('authors', []))
             title = title or data.get('title', '')
@@ -107,8 +107,8 @@ def ref_creation():
             pages = pages or data.get('pages') or None
             publisher = publisher or data.get('publisher') or None
             booktitle = booktitle or data.get('booktitle') or None
-            
-        except Exception as e:
+
+        except Exception as e:  # pylint: disable=broad-exception-caught
             flash(f"Error importing from ACM: {str(e)}")
             return redirect("/new_ref")
 
