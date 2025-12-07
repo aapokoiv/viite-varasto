@@ -7,12 +7,17 @@ class InvalidURLError(Exception):
 def validate_url(url):
     return url
 
-def validate_ref(ref_type, keyword, author, title, year):
+def validate_ref(ref_type, keyword, author, title, year, is_acm_import=False):
     if not ref_type:
         raise UserInputError("Reference type is required")
 
-    if author is None or title is None or year is None or keyword is None:
-        raise UserInputError("Author, title, year and keyword are required")
+    if is_acm_import:
+
+        if year is None:
+            raise UserInputError("Year is required")
+    else:
+        if author is None or title is None or year is None or keyword is None:
+            raise UserInputError("Author, title, year and keyword are required")
 
     author = str(author).strip()
     title = str(title).strip()

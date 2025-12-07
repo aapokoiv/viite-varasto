@@ -107,6 +107,9 @@ def ref_creation():  # pylint: disable=too-many-return-statements
             pages = pages or data.get('pages') or None
             publisher = publisher or data.get('publisher') or None
             booktitle = booktitle or data.get('booktitle') or None
+            # Generate keyword from title if not provided
+            if not keyword:
+                keyword = title[:50].replace(' ', '_') if title else 'acm_import'
 
         except Exception as e:  # pylint: disable=broad-exception-caught
             flash(f"Error importing from ACM: {str(e)}")
@@ -119,7 +122,7 @@ def ref_creation():  # pylint: disable=too-many-return-statements
     try:
         if ref_type == "article":
             volume = validate_article_fields(journal, volume, pages)
-        year_int = validate_ref(ref_type, keyword, author, title, year)
+        year_int = validate_ref(ref_type, keyword, author, title, year, is_acm_import=bool(acm_url))
     except UserInputError as error:
         flash(str(error))
         return redirect("/new_ref")
