@@ -30,7 +30,7 @@ See all the citations
             Category:
             <select id="category" name="category" required>
                 {% for category in available_filters["categories"] if category %}
-                    <option value="{{ category }}" {% if active_filters.type == category %}selected{% endif %}>
+                    <option value="{{ category }}" {% if active_filters.category == category %}selected{% endif %}>
                         {{ category|capitalize }}
                     </option>
                 {% endfor %}
