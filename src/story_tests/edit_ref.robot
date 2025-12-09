@@ -1,3 +1,9 @@
+# User can edit an existing reference
+# When editing, the same fields used for creating a reference are available
+# User can save the changes by clicking the "Edit" button
+# After saving, an updated reference is shown in the reference list
+# A notification is displayed to the user after a reference is successfully edited
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser

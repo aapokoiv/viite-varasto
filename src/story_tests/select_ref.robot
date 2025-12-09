@@ -1,3 +1,10 @@
+# User can select references to be included in bibtex-file by selecting individual references
+# User can filter references to be included in bibtex-file by category
+# User can select all shown references to be included in bibtex-file
+# User can generate bibtex-file containing only the selected references
+# User cannot generate bibtex-file if no references are selected
+
+
 *** Settings ***
 Resource  resource.robot
 Library  RequestsLibrary

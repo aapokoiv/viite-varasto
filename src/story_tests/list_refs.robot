@@ -1,6 +1,9 @@
-# User can see 10  references per page on the viewing page
-# User can see 20 references per page on the viewing page
-# User can see 50 references per page on the viewing page
+# User can view a list of saved references
+# The list displays at least the following information for each reference: Keyword, Author, Title, Year, Type
+# There are delete, edit and info buttons for each reference
+# The list is shown in a clear and readable format
+# If there are no saved references, the user sees a message indicating that the list is empty
+# User can choose if they want 10, 20 or 50 references shown per page
 
 *** Settings ***
 Resource  resource.robot
@@ -10,6 +13,9 @@ Test Setup  Reset Refs
 
 
 *** Test Cases ***
+Page Indicates That The List Is Empty With No Saved References
+    Open Reference List Page Raw
+    Page Should Contain  No references found yet.
 
 Page Lists Reference With No Parameters
     Create Reference  article  kw1  Matti  Ensimmäinen artikkeli  2000  doi=10.7000/lr1  category=ListArt

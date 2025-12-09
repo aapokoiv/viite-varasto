@@ -44,6 +44,9 @@ Open Home Page
 Open New Reference Page
     Go To  ${NEW_REF_URL}
 
+Open Reference List Page Raw
+    Go To  ${REF_LIST_URL}
+
 Open Reference List Page
     Go To  ${REF_LIST_URL}
     Wait Until Page Contains Element  class=refs-table  30 seconds
@@ -65,6 +68,13 @@ Fill Reference Form
     Input Text If Visible  name=ref_publisher  ${publisher}
     Input Text If Visible  name=ref_booktitle  ${booktitle}
 
+Fill ACM Form
+    [Arguments]  ${acm-url}  ${keyword}  ${category}=None
+    Go To    ${NEW_REF_URL}
+    Input Text  name=ref_acm_url  ${acm-url}
+    Input Text If Visible  name=ref_keyword_acm  ${keyword}
+    Input Text If Visible  name=ref_category_acm  ${category}
+
 Input Text If Visible
     [Arguments]  ${locator}  ${value}
     Run Keyword If  '${value}' == 'None'  Return From Keyword
@@ -80,6 +90,12 @@ Create Reference
     Open New Reference Page
     Fill Reference Form  ${type}  ${keyword}   ${author}  ${title}  ${year}  ${doi}  ${category}  ${journal}  ${volume}  ${pages}  ${publisher}  ${booktitle}
     Submit Reference
+
+Create Reference From ACM
+    [Arguments]  ${acm-url}  ${keyword}=None  ${category}=None
+    Open New Reference Page
+    Fill ACM Form  ${acm-url}  ${keyword}  ${category}
+    Click Button  name=acm_submit
 
 Create This Many References Quickly
     [Arguments]  ${amount}

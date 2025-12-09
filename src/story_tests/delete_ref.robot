@@ -1,3 +1,7 @@
+# User can delete a reference
+# After deletion the deleted reference isn't shown on the list of references
+# A notification is displayed to the user after a reference is successfully deleted
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser

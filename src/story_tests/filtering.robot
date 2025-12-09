@@ -1,5 +1,6 @@
 # User can filter the reference list by Year through a range input
-# User can filter the reference list by category
+# User can filter the reference list by Category
+# User can filter the reference list by Type
 # Multiple filters can be applied at the same time.
 
 *** Settings ***

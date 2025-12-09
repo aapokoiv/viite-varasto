@@ -1,3 +1,12 @@
+# User can add a reference using a form that includes at least the following fields: Keyword, Author, Title, Year, Type
+# A notification is displayed to the user after a reference is successfully added
+# When selecting a reference type, additional fields appear dynamically
+# User can fill a category field and a doi-identifier field on the reference form
+# An error message is displayed to the user if the form is missing required fields or if Year isn't an integer
+# User can add a reference from an ACM-url
+# An error message is displayed to the user if the url is invalid
+
+
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
@@ -57,3 +66,15 @@ Create Reference With Non-integer Year
 Create Reference Notification Is Displayed On Screen
     Create Reference  misc  year-kw  Maija  Testi  22
     Page Should Contain  Reference succesfully created.
+
+Create Reference From ACM-link Successfully With Filled Fields
+    Create Reference From ACM  https://dl.acm.org/doi/10.1145/2380552.2380613  acm-kw  acm-category
+    Page Should Contain  Reference succesfully created.
+
+Create Reference From ACM-link Successfully With Empty Fields
+    Create Reference From ACM  https://dl.acm.org/doi/10.1145/2380552.2380613
+    Page Should Contain  Reference succesfully created.
+
+Create Reference From Invalid ACM-link Produces Error
+    Create Reference From ACM  https://dl.acm.org/doi/123  acm-kw  acm-category
+    Page Should Contain  Error importing from ACM:
