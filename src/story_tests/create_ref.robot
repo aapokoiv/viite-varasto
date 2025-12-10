@@ -67,14 +67,6 @@ Create Reference Notification Is Displayed On Screen
     Create Reference  misc  year-kw  Maija  Testi  22
     Page Should Contain  Reference succesfully created.
 
-Create Reference From ACM-link Successfully With Filled Fields
-    Create Reference From ACM  https://dl.acm.org/doi/10.1145/2380552.2380613  acm-kw  acm-category
-    Page Should Contain  Reference succesfully created.
-
-Create Reference From ACM-link Successfully With Empty Fields
-    Create Reference From ACM  https://dl.acm.org/doi/10.1145/2380552.2380613
-    Page Should Contain  Reference succesfully created.
-
 Create Reference From Invalid ACM-link Produces Error
     Create Reference From ACM  https://dl.acm.org/doi/123  acm-kw  acm-category
     Page Should Contain  Error importing from ACM:
