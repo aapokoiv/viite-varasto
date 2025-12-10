@@ -44,8 +44,8 @@ def ref_list():
 
     filters = {
         "query": request.args.get("query", ""),
-        "type": request.args.get("type"),
-        "category": request.args.get("category"),
+        "type": request.args.get("type", "-"),
+        "category": request.args.get("category", "-"),
         "year_from": request.args.get("year_from", 0, type=int),
         "year_to": request.args.get("year_to", 2025, type=int)
     }

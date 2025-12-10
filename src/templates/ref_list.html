@@ -11,7 +11,7 @@ See all the citations
 <!-- Filtering -->
 <div class="filter-container">
     <span>Filter references:</span>
-    <form action="/view_refs" method="get" autocomplete="off">
+    <form id="filter-form" action="/view_refs" method="get" autocomplete="off">
         <div>
             Search:
             <input name="query" type="search" value="{{ active_filters.query }}" placeholder="Search for references..." maxlength="300">
@@ -46,8 +46,9 @@ See all the citations
     </form>
 </div>
 
+<!-- BibTeX Export -->
 {% if refs %}
-<div style="display: flex; gap: 10px;">
+<div style="display: flex; gap: 10px; margin-bottom: 10px;">
     <form action="{{ url_for('export_bibtex') }}" method="get"
             onsubmit="return confirm('Haluatko varmasti ladata BibTeX-tiedoston?')">
             <button type="submit">Lataa BibTeX</button>
@@ -56,6 +57,7 @@ See all the citations
             <button type="submit">Valitse viitteet BibTeX-tiedostoon</button>
     </form>
 </div>
+
 <!-- References -->
 <table class="refs-table">
     <thead>
@@ -113,9 +115,9 @@ See all the citations
 <!-- Page Navigation -->
 <div class="pagination">
     {% if page > 1 %}
-        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=page-1, ref_amount=per_page) }}">« Previous</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, category=active_filters.category, year_from=active_filters.year_from, year_to=active_filters.year_to, page=page-1, ref_amount=per_page) }}">« Previous</a>
         {% if page > 3 and pages > 5 %}
-            <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=1, ref_amount=per_page) }}">1</a>
+            <a id="first-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, category=active_filters.category, year_from=active_filters.year_from, year_to=active_filters.year_to, page=1, ref_amount=per_page) }}">1</a>
             <span class="pagination-dots">...</span>
         {% endif %}
     {% else %}
@@ -126,30 +128,28 @@ See all the citations
         {% if i == page %}
             <a class="selected-page">{{ i }}</a>
         {% else %}
-            <a id="page-{{ i }}" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=i, ref_amount=per_page) }}">{{ i }}</a>
+            <a id="page-{{ i }}" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, category=active_filters.category, year_from=active_filters.year_from, year_to=active_filters.year_to, page=i, ref_amount=per_page) }}">{{ i }}</a>
         {% endif %}
     {% endfor %}
 
     {% if page < pages %}
         {% if page < pages - 2 and pages > 5 %}
             <span class="pagination-dots">...</span>
-            <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
+            <a id="last-page" href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, category=active_filters.category, year_from=active_filters.year_from, year_to=active_filters.year_to, page=pages, ref_amount=per_page) }}">{{ pages }}</a>
         {% endif %}
-        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, year_from=active_filters.year_from, year_to=active_filters.year_to, page=page+1, ref_amount=per_page) }}">Next »</a>
+        <a href="{{ url_for('ref_list', query=active_filters.query, type=active_filters.type, category=active_filters.category, year_from=active_filters.year_from, year_to=active_filters.year_to, page=page+1, ref_amount=per_page) }}">Next »</a>
     {% else %}
         <a class="disabled">Next »</a>
     {% endif %}
 
     <div class="ref-amount">
-        <form action="/view_refs" method="get">
-            Showing
-            <select id="ref_amount" name="ref_amount" required onchange="this.form.submit()">
-                <option value=10 {% if per_page==10 %}selected{% endif %}>10</option>
-                <option value=25 {% if per_page==25 %}selected{% endif %}>25</option>
-                <option value=50 {% if per_page==50 %}selected{% endif %}>50</option>
-            </select>
-            references
-        </form>
+        Showing
+        <select id="ref_amount" name="ref_amount" form="filter-form" required onchange="document.getElementById('filter-form').submit()">
+            <option value=10 {% if per_page==10 %}selected{% endif %}>10</option>
+            <option value=25 {% if per_page==25 %}selected{% endif %}>25</option>
+            <option value=50 {% if per_page==50 %}selected{% endif %}>50</option>
+        </select>
+        references
     </div>
 </div>
 

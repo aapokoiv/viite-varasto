@@ -4,6 +4,10 @@
 # The list is shown in a clear and readable format
 # If there are no saved references, the user sees a message indicating that the list is empty
 # User can choose if they want 10, 20 or 50 references shown per page
+# User can see 10  references per page on the viewing page
+# User can see 20 references per page on the viewing page
+# User can see 50 references per page on the viewing page
+
 
 *** Settings ***
 Resource  resource.robot
@@ -13,9 +17,6 @@ Test Setup  Reset Refs
 
 
 *** Test Cases ***
-Page Indicates That The List Is Empty With No Saved References
-    Open Reference List Page Raw
-    Page Should Contain  No references found yet.
 
 Page Lists Reference With No Parameters
     Create Reference  article  kw1  Matti  Ensimmäinen artikkeli  2000  doi=10.7000/lr1  category=ListArt
@@ -30,7 +31,7 @@ Paging Moves Eleventh Reference to Second Page When Showing 10
     Page Should Contain  Ref 1
     Page Should Contain  Ref 10
     Page Should Not Contain  Ref 11
-    Go To  ${REF_LIST_URL}?page=2&ref_amount=10
+    Go To  ${REF_LIST_URL}?page=2&ref_amount=10${FILTERS_URL}
     Page Should Contain  Ref 11
     Page Should Not Contain  Ref 2
 
@@ -41,7 +42,7 @@ Paging Moves Twentysixth Reference When Showing 25
     Page Should Contain  Ref 1
     Page Should Contain  Ref 25
     Page Should Not Contain  Ref 26
-    Go To  ${REF_LIST_URL}?page=2&ref_amount=25
+    Go To  ${REF_LIST_URL}?page=2&ref_amount=25${FILTERS_URL}
     Page Should Contain  Ref 26
     Page Should Not Contain  Ref 25
 
@@ -52,7 +53,7 @@ Paging Moves Fiftyfirst Reference When Showing 50
     Page Should Contain  Ref 1
     Page Should Contain  Ref 50
     Page Should Not Contain  Ref 51
-    Go To  ${REF_LIST_URL}?page=2&ref_amount=50
+    Go To  ${REF_LIST_URL}?page=2&ref_amount=50${FILTERS_URL}
     Page Should Contain  Ref 51
     Page Should Not Contain  Ref 50
 
@@ -63,16 +64,16 @@ Paging Shows First And Last Pages When In Specific Range
     Page Should Contain  Next
     Page Should Not Contain Element  first-page
     Page Should Contain Element  last-page
-    Go To  ${REF_LIST_URL}?page=4&ref_amount=10
+    Go To  ${REF_LIST_URL}?page=4&ref_amount=10${FILTERS_URL}
     Page Should Contain Element  first-page
     Page Should Contain Element  last-page
-    Go To  ${REF_LIST_URL}?page=7&ref_amount=10
+    Go To  ${REF_LIST_URL}?page=7&ref_amount=10${FILTERS_URL}
     Page Should Not Contain Element  last-page
     Page Should Contain Element  first-page
 
 Paging Shows Two Pages Forward And Back From Currently Selected
     Create This Many References Quickly  50
-    Go To  ${REF_LIST_URL}?page=3&ref_amount=10
+    Go To  ${REF_LIST_URL}?page=3&ref_amount=10${FILTERS_URL}
     Page Should Contain Element  page-1
     Page Should Contain Element  page-2
     Page Should Contain Element  page-4

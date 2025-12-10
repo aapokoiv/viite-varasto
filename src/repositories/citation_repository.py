@@ -98,15 +98,11 @@ def get_citations(page: int=1, per_page: int=10, filters = None):
 
 def get_filters():
     sql = text("SELECT DISTINCT type FROM citations")
-    sql2 = text("SELECT DISTINCT year FROM citations")
-    sql3 = text("SELECT DISTINCT category FROM citations")
-    # Clean queries to include only relevant information.
+    sql2 = text("SELECT DISTINCT category FROM citations")
     types = ["-"] + [type[0] for type in db.session.execute(sql).fetchall()]
-    years = ["-"] + [year[0] for year in db.session.execute(sql2).fetchall()]
-    categories = ["-"] + [category[0] for category in db.session.execute(sql3).fetchall()]
+    categories = ["-"] + [category[0] for category in db.session.execute(sql2).fetchall()]
 
     return {"types": types,
-            "years": years,
             "categories": categories}
 
 def create_ref(ref_type, keyword, author, title, year, doi=None, category=None, journal=None, volume=None, pages=None, publisher=None, booktitle=None):
